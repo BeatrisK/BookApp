@@ -1,5 +1,4 @@
 using BookApp.Data;
-using BookApp.Data.Models;
 using BookApp.Services.Data;
 using BookApp.Services.Data.Interfaces;
 using BookApp.Data.Models.Repository;
@@ -28,6 +27,7 @@ builder.Services
 
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

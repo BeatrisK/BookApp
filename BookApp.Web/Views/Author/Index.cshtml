@@ -1,0 +1,30 @@
+﻿@using BookApp.Web.ViewModels.Author
+@model IEnumerable<AuthorIndexViewModel>
+
+@{
+    ViewData["Title"] = "Author's books";
+}
+
+
+
+<div class="row">
+    @foreach (var author in Model)
+    {
+        <div class="col-md-4">
+            <h2 class="card-title">@author.Name 's book</h2>
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <ul>
+                        @foreach (var book in author.Books)
+                        {
+                            <tr>
+                                <td>@book.Title</td>
+                                <img src="@book.ImageUrl" alt="Book Image" />
+                            </tr>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>
