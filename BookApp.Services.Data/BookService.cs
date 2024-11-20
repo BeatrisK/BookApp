@@ -76,6 +76,7 @@ namespace BookApp.Services.Data
         {
             Book? book = await this.bookRepository
               .GetAllAttached()
+              .Include(b => b.Author)
               .FirstOrDefaultAsync(c => c.Id == id);
 
             var bookModel = new EditBookViewModel()
@@ -88,7 +89,7 @@ namespace BookApp.Services.Data
                 Price = book.Price,
                 ImageUrl = book.ImageUrl,
                 AuthorId = book.AuthorId,
-                //AuthorName = book.Author.Name
+                AuthorName = book.Author.Name
             };
 
             return bookModel;
@@ -114,9 +115,22 @@ namespace BookApp.Services.Data
 
         public async Task<bool> EditBookAsync(EditBookViewModel model)
         {
+            var author = await authorRepository
+                .FirstOrDefaultAsync(a => a.Id == model.AuthorId);
+
+
+            if (author == null)
+            {
+                author = new Author
+                {
+                    Id = model.AuthorId,
+                    Name = model.AuthorName  
+                };
+            }
+
             var book = new Book
             {
-                Id= model.Id,
+                Id = model.Id,
                 Title = model.Title,
                 Genre = model.Genre,
                 Pages = model.Pages,
@@ -124,13 +138,7 @@ namespace BookApp.Services.Data
                 Publisher = model.Publisher,
                 Price = model.Price,
                 ImageUrl = model.ImageUrl,
-                AuthorId = model.AuthorId,
-
-                /*Author = new Author()
-                {
-                    Id = model.AuthorId,
-                    Name = model.AuthorName
-				}*/
+                Author = author
             };
 
             bool result = await this.bookRepository.UpdateAsync(book);
