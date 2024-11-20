@@ -9,14 +9,26 @@ namespace BookApp.Services.Data
     public class BookService : IBookService
     {
         private IRepository<Book, int> bookRepository;
+        private IRepository<Author, int> authorRepository;
 
-        public BookService(IRepository<Book, int> bookRepository)
+        public BookService(IRepository<Book, int> bookRepository, IRepository<Author, int> authorRepository)
         {
             this.bookRepository = bookRepository;
+            this.authorRepository = authorRepository;
         }
 
         public async Task CreateBookAsync(CreateBookViewModel model)
         {
+            var author = await authorRepository
+                .GetAllAttached()
+                .FirstOrDefaultAsync(a => a.Name == model.AuthorName);
+
+            if (author == null)
+            {
+                author = new Author { Name = model.AuthorName };
+                await authorRepository.AddAsync(author);
+            }
+
             Book book = new Book
             {
                 Title = model.Title,
@@ -25,15 +37,9 @@ namespace BookApp.Services.Data
                 Price = model.Price,
                 Description = model.Description,
                 Publisher = model.Publisher,
-                ImageUrl = model.ImageUrl
+                ImageUrl = model.ImageUrl,
+                Author = author
             };
-
-            if (book.Author == null)
-            {
-                book.Author = new Author();  
-            }
-
-            book.Author.Name = model.AuthorName;
 
             await this.bookRepository.AddAsync(book);
         }
@@ -57,13 +63,35 @@ namespace BookApp.Services.Data
                     Pages = book.Pages,
                     Description = book.Description,
                     Publisher = book.Publisher,
-                    Price= book.Price,
+                    Price = book.Price,
                     ImageUrl = book.ImageUrl,
                     Author = book.Author.Name
                 };
             }
 
             return viewModel;
+        }
+
+        public async Task<EditBookViewModel> GetBookForEditByIdAsync(int id)
+        {
+            Book? book = await this.bookRepository
+              .GetAllAttached()
+              .FirstOrDefaultAsync(c => c.Id == id);
+
+            var bookModel = new EditBookViewModel()
+            {
+                Title = book.Title,
+                Genre = book.Genre,
+                Pages = book.Pages,
+                Description = book.Description,
+                Publisher = book.Publisher,
+                Price = book.Price,
+                ImageUrl = book.ImageUrl,
+                AuthorId = book.AuthorId,
+                //AuthorName = book.Author.Name
+            };
+
+            return bookModel;
         }
 
         public async Task<IEnumerable<BookIndexViewModel>> IndexGetAllAsync()
@@ -75,12 +103,38 @@ namespace BookApp.Services.Data
                 {
                     Id = b.Id,
                     Title = b.Title,
-                    Author = b.Author.Name,
-                    ImageUrl= b.ImageUrl
+                    ImageUrl = b.ImageUrl,
+                    AuthorName = b.Author.Name,
+                    AuthorId = b.Author.Id
                 })
                 .ToArrayAsync();
 
             return books;
+        }
+
+        public async Task<bool> EditBookAsync(EditBookViewModel model)
+        {
+            var book = new Book
+            {
+                Id= model.Id,
+                Title = model.Title,
+                Genre = model.Genre,
+                Pages = model.Pages,
+                Description = model.Description,
+                Publisher = model.Publisher,
+                Price = model.Price,
+                ImageUrl = model.ImageUrl,
+                AuthorId = model.AuthorId,
+
+                /*Author = new Author()
+                {
+                    Id = model.AuthorId,
+                    Name = model.AuthorName
+				}*/
+            };
+
+            bool result = await this.bookRepository.UpdateAsync(book);
+            return result;
         }
     }
 }

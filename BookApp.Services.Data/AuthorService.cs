@@ -10,30 +10,42 @@ namespace BookApp.Services.Data
     public class AuthorService : IAuthorService
     {
         private IRepository<Author, int> authorRepository;
+        private IRepository<Book, int> bookRepository;
 
-        public AuthorService(IRepository<Author, int> authorRepository)
+        public AuthorService(IRepository<Author, int> authorRepository, IRepository<Book, int> bookRepository)
         {
             this.authorRepository = authorRepository;
+            this.bookRepository = bookRepository;
         }
 
-        public async Task<IEnumerable<AuthorIndexViewModel>> IndexGetAllAsync()
+        public async Task<AuthorIndexViewModel> IndexGetAllBooksOfAuthorAsync(int id)
         {
-            IEnumerable<AuthorIndexViewModel> books = await this.authorRepository
+            Author? author = await authorRepository
                 .GetAllAttached()
                 .Include(a => a.Books)
-                .OrderBy(a => a.Name)
-                .Select(a => new AuthorIndexViewModel
-                {
-                    Name = a.Name,
-                    ImageUrl = a.ImageUrl,
-                    Books = a.Books.Select(b => new BookIndexViewModel
-                    {
-                        Title = b.Title
-                    }).ToList() 
-                })
-                .ToArrayAsync();
+                .FirstOrDefaultAsync(a => a.Id == id);
 
-            return books;
+            AuthorIndexViewModel viewModel = null;
+
+            if (author != null)
+            {
+                viewModel = new AuthorIndexViewModel
+                {
+                    Id = author.Id,
+                    Name = author.Name,
+                    Biography = author.Biography,
+                    Books = author.Books.Select(b => new AuthorPageBookDetailsViewModel
+                    {
+                        Title = b.Title,
+                        Genre = b.Genre,
+                        Pages = b.Pages,
+                        Publisher = b.Publisher,
+                        ImageUrl = b.ImageUrl
+                    }).ToList()
+                };
+            }
+
+            return viewModel;
         }
     }
 }

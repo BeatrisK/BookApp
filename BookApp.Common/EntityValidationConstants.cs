@@ -5,7 +5,7 @@
         public static class Book
         {
             public const int TitleMaxLength = 50;
-            public const int TitleMinLength = 5;
+            public const int TitleMinLength = 3;
             public const int GenreMinLength = 5;
             public const int GenreMaxLength = 20;
             public const int DescriptionMaxLength = 500;
@@ -20,8 +20,8 @@
         {
             public const int NameMaxLength = 50;
             public const int NameMinLength = 5;
-            public const int AuthorImageUrlMaxLength = 2083;
-            public const int AuthorImageUrlMinLength = 8;
+            public const int BiographyMaxLength = 500;
+            public const int BiographyMinLength = 50;
         }
 
         public static class Review

@@ -43,7 +43,8 @@
 
             builder
                 .Property(b => b.Price)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
 
             builder
                 .Property(m => m.ImageUrl)

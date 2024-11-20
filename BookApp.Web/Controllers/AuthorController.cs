@@ -1,7 +1,6 @@
 ﻿namespace BookApp.Web.Controllers
 {
     using BookApp.Services.Data.Interfaces;
-    using BookApp.Web.ViewModels.Author;
     using Microsoft.AspNetCore.Mvc;
 
     public class AuthorController : Controller
@@ -11,12 +10,18 @@
         {
             this.authorService = authorService;
         }
-        public async Task<IActionResult> Index()
-        {
-            IEnumerable <AuthorIndexViewModel> books =
-                await this.authorService.IndexGetAllAsync();
 
-            return View(books);
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            var viewModel = await authorService.IndexGetAllBooksOfAuthorAsync(id);
+
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
         }
     }
 }

@@ -8,5 +8,10 @@
         Task CreateBookAsync(CreateBookViewModel model);
 
         Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(int id);
-    }
+
+        Task<EditBookViewModel> GetBookForEditByIdAsync(int id);
+
+        public Task<bool> EditBookAsync(EditBookViewModel model);
+
+	}
 }

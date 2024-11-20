@@ -23,9 +23,9 @@
                 .HasMaxLength(NameMaxLength);
 
             builder
-                .Property(m => m.ImageUrl)
-                .IsRequired(false)
-                .HasMaxLength(AuthorImageUrlMaxLength);
+                .Property(m => m.Biography)
+                .IsRequired()
+                .HasMaxLength(BiographyMaxLength);
 
             builder
                 .HasMany(a => a.Books)
@@ -37,7 +37,7 @@
             //    .HasData(this.GenerateAuthors());
         }
 
-        private IEnumerable<Author> GenerateAuthors()
+        /*private IEnumerable<Author> GenerateAuthors()
         {
             IEnumerable<Author> authors = new List<Author>()
             {
@@ -59,6 +59,6 @@
             };
 
             return authors;
-        }
+        }*/
     }
 }
