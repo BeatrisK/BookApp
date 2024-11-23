@@ -1,6 +1,6 @@
 ﻿namespace BookApp.Web.ViewModels.MyBook
 {
-    public class IndexMyBooViewModel
+    public class IndexMyBookViewModel
     {
         public int Id { get; set; }
 

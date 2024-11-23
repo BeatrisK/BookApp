@@ -28,6 +28,7 @@ builder.Services
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IMyBookService, MyBookService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

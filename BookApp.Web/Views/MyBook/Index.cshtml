@@ -1,38 +1,31 @@
-﻿@using BookApp.Web.ViewModels.MyBook;
-@model List<IndexMyBooViewModel>
+﻿@{
+    ViewBag.Title = "My Books";
+}
 
-<h1>Books</h1>
+<div class="bg-dark text-white text-center py-5">
+    <div class="container">
+        <h2 class="display-5 fw-bold">Your Gateway to the World of Books</h2>
+        <p class="mb-4">Discover your favorite books, explore popular genres, and keep track of your reading journey.</p>
+        <a asp-controller="Book" asp-action="Index" class="btn btn-primary btn-lg btn-block mx-auto w-50">Explore Books</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>
-                    <form asp-action="AddToReadList" method="post" style="display:inline">
-                        <input type="hidden" name="id" value="@book.Id" />
-                        <button class="btn btn-success" @(book.IsInReadList ? "disabled" : "")>
-                            Add to Read List
-                        </button>
-                    </form>
+    </div>
+</div>
 
-                    <form asp-action="AddToWantToReadList" method="post" style="display:inline">
-                        <input type="hidden" name="id" value="@book.Id" />
-                        <button class="btn btn-primary" @(book.IsInWantToReadList ? "disabled" : "")>
-                            Add to Want to Read List
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card p-4 text-center">
+                <h5 class="card-title">Read List</h5>
+                <p class="card-text">View all the books you've read and relive your favorite stories.</p>
+                <a asp-controller="Books" asp-action="UserReadList" class="btn btn-primary">View Read List</a>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card p-4 text-center">
+                <h5 class="card-title">Want to Read</h5>
+                <p class="card-text">Browse your collection of books you want to read next.</p>
+                <a asp-controller="Books" asp-action="UserWantToReadList" class="btn btn-primary">View Want to Read List</a>
+            </div>
+        </div>
+    </div>
+</div>

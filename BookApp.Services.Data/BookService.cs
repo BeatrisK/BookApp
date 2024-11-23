@@ -17,6 +17,24 @@ namespace BookApp.Services.Data
             this.authorRepository = authorRepository;
         }
 
+        public async Task<IEnumerable<BookIndexViewModel>> IndexGetAllAsync()
+        {
+            IEnumerable<BookIndexViewModel> books = await this.bookRepository
+                .GetAllAttached()
+                .OrderBy(b => b.Title)
+                .Select(b => new BookIndexViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    ImageUrl = b.ImageUrl,
+                    AuthorName = b.Author.Name,
+                    AuthorId = b.Author.Id
+                })
+                .ToArrayAsync();
+
+            return books;
+        }
+
         public async Task CreateBookAsync(CreateBookViewModel model)
         {
             var author = await authorRepository
@@ -95,37 +113,24 @@ namespace BookApp.Services.Data
             return bookModel;
         }
 
-        public async Task<IEnumerable<BookIndexViewModel>> IndexGetAllAsync()
-        {
-            IEnumerable<BookIndexViewModel> books = await this.bookRepository
-                .GetAllAttached()
-                .OrderBy(b => b.Title)
-                .Select(b => new BookIndexViewModel
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    ImageUrl = b.ImageUrl,
-                    AuthorName = b.Author.Name,
-                    AuthorId = b.Author.Id
-                })
-                .ToArrayAsync();
-
-            return books;
-        }
-
         public async Task<bool> EditBookAsync(EditBookViewModel model)
         {
-            var author = await authorRepository
-                .FirstOrDefaultAsync(a => a.Id == model.AuthorId);
+            var author = await authorRepository.FirstOrDefaultAsync(a => a.Id == model.AuthorId);
 
-
-            if (author == null)
+            if (author == null && !string.IsNullOrWhiteSpace(model.AuthorName))
             {
-                author = new Author
+                author = await authorRepository.FirstOrDefaultAsync(a => a.Name == model.AuthorName);
+
+                if (author == null)
                 {
-                    Id = model.AuthorId,
-                    Name = model.AuthorName  
-                };
+                    author = new Author
+                    {
+                        Id = model.AuthorId,
+                        Name = model.AuthorName
+                    };
+
+                    await authorRepository.AddAsync(author);
+                }
             }
 
             var book = new Book
