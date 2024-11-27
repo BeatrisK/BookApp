@@ -1,8 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to the Book Haven";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container text-center my-5">
+    <h2 class="display-4 fw-bold">Welcome to the Book Haven</h2>
+    <p class="text-muted mb-4">Discover a wide variety of books and start your reading journey today!</p>
+
+    <a asp-controller="Book" asp-action="Index" class="btn btn-outline-dark btn-lg px-4">Browse Our Collection</a>
+</div>
+
+<div class="container my-5 text-center">
+    <h3 class="fw-bold mb-3">How to Start</h3>
+    <p class="text-muted mb-4">Choose your next step and dive into the world of books!</p>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        
+        <div class="col">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="text-info w-100">Read List</h5>
+                    <p class="text-muted">Keep track of your reading journey by marking books as read.</p>
+                    <a asp-controller="Books" asp-action="MarkAsReadList" class="btn btn-outline-info w-100">View Read List</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">Wishlist</h5>
+                    <p class="text-muted">Not sure what to read next? Add books to your wishlist for later.</p>
+                    <a asp-controller="Books" asp-action="MarkAsWantToReadList" class="btn btn-outline-warning w-100">View Wishlist</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
