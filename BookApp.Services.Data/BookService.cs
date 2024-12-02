@@ -21,6 +21,7 @@ namespace BookApp.Services.Data
         {
             IEnumerable<BookIndexViewModel> books = await this.bookRepository
                 .GetAllAttached()
+                .Where(b => b.IsDeleted == false)
                 .OrderBy(b => b.Title)
                 .Select(b => new BookIndexViewModel
                 {
@@ -67,6 +68,7 @@ namespace BookApp.Services.Data
             Book? book = await this.bookRepository
                 .GetAllAttached()
                 .Include(b => b.Author)
+                .Where(b => b.IsDeleted == false)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
             BookDetailsViewModel? viewModel = null;
@@ -95,6 +97,7 @@ namespace BookApp.Services.Data
             Book? book = await this.bookRepository
               .GetAllAttached()
               .Include(b => b.Author)
+              .Where(b => b.IsDeleted == false)
               .FirstOrDefaultAsync(c => c.Id == id);
 
             var bookModel = new EditBookViewModel()
@@ -148,6 +151,35 @@ namespace BookApp.Services.Data
 
             bool result = await this.bookRepository.UpdateAsync(book);
             return result;
+        }
+
+        public async Task<DeleteBookViewModel?> GetBookForDeleteByIdAsync(int id)
+        {
+            DeleteBookViewModel? bookToDelete = await this.bookRepository
+                .GetAllAttached()
+                .Where(c => c.IsDeleted == false)
+                .Select(b => new DeleteBookViewModel()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                })
+                .FirstOrDefaultAsync(b => b.Id.ToString().ToLower() == id.ToString().ToLower());
+
+            return bookToDelete;
+        }
+
+        public async Task<bool> SoftDeleteBookAsync(int id)
+        {
+            Book? bookToDelete = await this.bookRepository
+                .FirstOrDefaultAsync(c => c.Id.ToString().ToLower() == id.ToString().ToLower());
+
+            if (bookToDelete == null)
+            {
+                return false;
+            }
+
+            bookToDelete.IsDeleted = true;
+            return await this.bookRepository.UpdateAsync(bookToDelete);
         }
     }
 }

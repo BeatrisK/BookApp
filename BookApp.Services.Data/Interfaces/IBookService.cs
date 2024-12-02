@@ -13,5 +13,9 @@
 
         public Task<bool> EditBookAsync(EditBookViewModel model);
 
-	}
+        public Task<DeleteBookViewModel?> GetBookForDeleteByIdAsync(int id);
+
+        public Task<bool> SoftDeleteBookAsync(int id);
+
+    }
 }

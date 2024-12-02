@@ -22,7 +22,7 @@ namespace BookApp.Services.Data
         {
             Author? author = await authorRepository
                 .GetAllAttached()
-                .Include(a => a.Books)
+                .Include(a => a.Books.Where(b => !b.IsDeleted))
                 .FirstOrDefaultAsync(a => a.Id == id);
 
             AuthorIndexViewModel viewModel = null;

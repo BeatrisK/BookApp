@@ -57,6 +57,11 @@
                 .HasForeignKey(b => b.AuthorId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder
+                .Property(b => b.IsDeleted)
+                .IsRequired()
+                .HasDefaultValue(false);
+
             //builder.HasData(this.GenerateBooks());
         }
 

@@ -4,6 +4,7 @@
     using BookApp.Web.ViewModels.Book;
 	using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
+    using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
     public class BookController : Controller
     {
@@ -88,5 +89,35 @@
 
 			return this.RedirectToAction(nameof(Details), "Book", new { id = model.Id });
 		}
-	}
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        { 
+            DeleteBookViewModel? bookToDeleteViewModel =
+                await this.bookService.GetBookForDeleteByIdAsync(id);
+
+            if (bookToDeleteViewModel == null)
+            {
+                return this.RedirectToAction(nameof(Index));
+            }
+
+            return this.View(bookToDeleteViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SoftDeleteConfirmed(DeleteBookViewModel book)
+        {
+            bool isDeleted = await this.bookService
+                .SoftDeleteBookAsync(book.Id);
+
+            if (!isDeleted)
+            {
+                TempData["ErrorMessage"] =
+                    "Unexpected error occurred while trying to delete the book! Please contact system administrator!";
+                return this.RedirectToAction(nameof(Delete), new { id = book.Id });
+            }
+
+            return this.RedirectToAction(nameof(Index));
+        }
+    }
 }
