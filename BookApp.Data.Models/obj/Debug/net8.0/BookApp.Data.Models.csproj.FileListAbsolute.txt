@@ -1,0 +1,12 @@
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\bin\Debug\net8.0\BookApp.Data.Models.deps.json
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\bin\Debug\net8.0\BookApp.Data.Models.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\bin\Debug\net8.0\BookApp.Data.Models.pdb
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.AssemblyInfoInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.AssemblyInfo.cs
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.csproj.CoreCompileInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.sourcelink.json
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\refint\BookApp.Data.Models.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.pdb
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\ref\BookApp.Data.Models.dll

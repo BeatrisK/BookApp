@@ -1,0 +1,195 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj",
+        "projectName": "BookApp.Common",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj",
+        "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj",
+        "projectName": "BookApp.Data.Models",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj",
+        "projectName": "BookApp.Web.ViewModels",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj"
+              },
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

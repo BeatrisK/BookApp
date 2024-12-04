@@ -1,0 +1,9 @@
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.csproj.AssemblyReference.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.AssemblyInfoInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.AssemblyInfo.cs
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.csproj.CoreCompileInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.RazorAssemblyInfo.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.RazorAssemblyInfo.cs
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web\obj\Debug\net8.0\BookApp.Web.sourcelink.json

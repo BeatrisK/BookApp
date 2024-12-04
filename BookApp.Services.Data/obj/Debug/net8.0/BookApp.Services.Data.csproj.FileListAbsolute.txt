@@ -1,0 +1,6 @@
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Data\obj\Debug\net8.0\BookApp.Services.Data.csproj.AssemblyReference.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Data\obj\Debug\net8.0\BookApp.Services.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Data\obj\Debug\net8.0\BookApp.Services.Data.AssemblyInfoInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Data\obj\Debug\net8.0\BookApp.Services.Data.AssemblyInfo.cs
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Data\obj\Debug\net8.0\BookApp.Services.Data.csproj.CoreCompileInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Data\obj\Debug\net8.0\BookApp.Services.Data.sourcelink.json
