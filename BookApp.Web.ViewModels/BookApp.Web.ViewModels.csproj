@@ -9,6 +9,11 @@
   <ItemGroup>
     <ProjectReference Include="..\BookApp.Common\BookApp.Common.csproj" />
     <ProjectReference Include="..\BookApp.Data.Models\BookApp.Data.Models.csproj" />
+    <ProjectReference Include="..\BookApp.Data\BookApp.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ReadList\" />
   </ItemGroup>
 
 </Project>

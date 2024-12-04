@@ -3,7 +3,6 @@
     using BookApp.Data.Models;
     using BookApp.Data.Models.Repository.Interfaces;
     using BookApp.Services.Data.Interfaces;
-    using BookApp.Web.ViewModels.Book;
     using BookApp.Web.ViewModels.MyBook;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -32,35 +31,6 @@
                 .ToArrayAsync();
 
             return books;
-        }
-        public Task<bool> AddBookToUserBookListAsync(string? bookId, string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> AddUserWantToReadListAsync(string? bookId, string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<UserReadBooksViewModel>> GetUserBookListByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<UserReadBooksViewModel>> GetUserWantToReadListkByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> RemoveBookFromUserBookAsync(string? bookId, string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> RemoveFromUserWantToReadListAsync(string? bookId, string userId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

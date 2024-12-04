@@ -23,6 +23,9 @@
 
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<ApplicationUserBook> BookApplicationUsers { get; set; } =
+            new HashSet<ApplicationUserBook>();
+
         public ICollection<Review> Reviews { get; set; } 
             = new HashSet<Review>();
     }

@@ -33,7 +33,6 @@ namespace BookApp.Services.Data
                 {
                     Id = author.Id,
                     Name = author.Name,
-                    Biography = author.Biography,
                     Books = author.Books.Select(b => new AuthorPageBookDetailsViewModel
                     {
                         Title = b.Title,

@@ -23,11 +23,6 @@
                 .HasMaxLength(NameMaxLength);
 
             builder
-                .Property(m => m.Biography)
-                .IsRequired()
-                .HasMaxLength(BiographyMaxLength);
-
-            builder
                 .HasMany(a => a.Books)
                 .WithOne(b => b.Author)
                 .HasForeignKey(b => b.AuthorId)

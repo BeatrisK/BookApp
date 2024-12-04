@@ -1,11 +1,14 @@
-﻿using BookApp.Data.Models;
+﻿using BookApp.Data.Configuration;
+using BookApp.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
+using System.Reflection;
 
 namespace BookApp.Data
 {
-    public class BookDbContext : IdentityDbContext<IdentityUser>
+    public class BookDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public BookDbContext()
         {
@@ -26,9 +29,12 @@ namespace BookApp.Data
 
         public virtual DbSet<Shelve> Shelves { get; set; }
 
+        public virtual DbSet<ApplicationUserBook> UsersBooks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

@@ -5,35 +5,26 @@
 namespace BookApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBiographyToAuthor : Migration
+    public partial class RemoveAuthorBio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ImageUrl",
-                table: "Authors");
-
-            migrationBuilder.AddColumn<string>(
                 name: "Biography",
-                table: "Authors",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                table: "Authors");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Biography",
-                table: "Authors");
-
             migrationBuilder.AddColumn<string>(
-                name: "ImageUrl",
+                name: "Biography",
                 table: "Authors",
-                type: "nvarchar(max)",
-                nullable: true);
+                type: "nvarchar(500)",
+                maxLength: 500,
+                nullable: false,
+                defaultValue: "");
         }
     }
 }
