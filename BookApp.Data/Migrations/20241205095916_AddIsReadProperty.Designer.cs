@@ -4,6 +4,7 @@ using BookApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookApp.Data.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205095916_AddIsReadProperty")]
+    partial class AddIsReadProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,12 +98,6 @@ namespace BookApp.Data.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsWantToRead")
-                        .HasColumnType("bit");
-
                     b.HasKey("ApplicationUserId", "BookId");
 
                     b.HasIndex("BookId");
@@ -152,6 +149,11 @@ namespace BookApp.Data.Migrations
                         .HasColumnType("nvarchar(2083)");
 
                     b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsRead")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
@@ -270,7 +272,10 @@ namespace BookApp.Data.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -278,7 +283,7 @@ namespace BookApp.Data.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("WantToReadList");
                 });
@@ -486,7 +491,7 @@ namespace BookApp.Data.Migrations
 
                     b.HasOne("BookApp.Data.Models.ApplicationUser", "User")
                         .WithMany("WantToReadLists")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

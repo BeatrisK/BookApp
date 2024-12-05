@@ -2,7 +2,6 @@
 using BookApp.Data.Models.Repository.Interfaces;
 using BookApp.Services.Data.Interfaces;
 using BookApp.Web.ViewModels.Lists;
-using BookApp.Web.ViewModels.MyBook;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookApp.Services.Data
@@ -10,11 +9,13 @@ namespace BookApp.Services.Data
     public class WantToReadService : IWantToReadService
     {
         private IRepository<Book, int> bookRepository;
+        private readonly IReadListService readListService;
         private IRepository<ApplicationUserBook, object> userBookRepository;
 
-        public WantToReadService(IRepository<Book, int> bookRepository, IRepository<ApplicationUserBook, object> userBookRepository)
+        public WantToReadService(IRepository<Book, int> bookRepository, IReadListService readListService, IRepository<ApplicationUserBook, object> userBookRepository)
         {
             this.bookRepository = bookRepository;
+            this.readListService = readListService;
             this.userBookRepository = userBookRepository;
         }
 
@@ -23,7 +24,7 @@ namespace BookApp.Services.Data
             IEnumerable<ApplicationUserListsViewModel> wantToRead = await this.userBookRepository
                 .GetAllAttached()
                 .Include(ub => ub.Book.Author)
-                .Where(ub => ub.ApplicationUserId.ToString().ToLower() == id.ToString().ToLower())
+                .Where(ub => ub.ApplicationUserId == id && ub.IsWantToRead == true)
                 .Select(ub => new ApplicationUserListsViewModel()
                 {
                     BookId = ub.BookId,
@@ -40,45 +41,85 @@ namespace BookApp.Services.Data
 
         public async Task<bool> AddBookToUserWantToReadListAsync(int bookId, string userId)
         {
+            var isInReadList = await this.readListService.IsBookInReadListAsync(bookId, userId);
+            if (isInReadList)
+            {
+                await MoveBookToWantToReadListAsync(bookId, userId);
+                return true;
+            }
+
+            var isInWantToReadList = await IsBookInWantToReadListAsync(bookId, userId);
+            if (isInWantToReadList)
+            {
+                return false; 
+            }
+
+            var userBook = await userBookRepository
+                .FirstOrDefaultAsync(ub => ub.BookId == bookId && ub.ApplicationUserId == userId);
+
+            if (userBook == null)
+            {
+                userBook = new ApplicationUserBook
+                {
+                    ApplicationUserId = userId,
+                    BookId = bookId,
+                    IsWantToRead = true,
+                    IsRead = false
+                };
+                await userBookRepository.AddAsync(userBook);
+            }
+            else
+            {
+                userBook.IsWantToRead = true;
+                await userBookRepository.UpdateAsync(userBook);
+            }
+
+            return true; /*
+            if (await this.readListService.IsBookInReadListAsync(bookId, userId))
+            {
+                return false;
+            }
+
             Book? book = await bookRepository
                 .GetByIdAsync(bookId);
 
-            if (book == null)
+            if (book == null || userId == null)
             {
                 return false;
             }
 
-            if (userId == null)
-            {
-                return false;
-            }
+            var userBook = await userBookRepository
+                .FirstOrDefaultAsync(ub => ub.BookId == bookId && ub.ApplicationUserId == userId);
 
-            ApplicationUserBook? addedToWatchlistAlready = await userBookRepository
-                .FirstOrDefaultAsync(um => um.BookId == bookId &&
-                                           um.ApplicationUserId == userId);
-
-            if (addedToWatchlistAlready == null)
+            if (userBook == null)
             {
-                ApplicationUserBook newUserMovie = new ApplicationUserBook()
+                userBook = new ApplicationUserBook()
                 {
                     ApplicationUserId = userId,
-                    BookId = bookId
+                    BookId = bookId,
+                    IsRead = false,
+                    IsWantToRead = true
                 };
 
                 await this.userBookRepository
-                     .AddAsync(newUserMovie);
+                     .AddAsync(userBook);
+            }
+            else
+            {
+                userBook.IsRead = false;
+                userBook.IsWantToRead = true;
+                await userBookRepository.UpdateAsync(userBook);
             }
 
-            return true;
+            return true;*/
         }
-
 
         public async Task<bool> RemoveFromUserWantToReadListAsync(int bookId, string userId)
         {
-            Book? movie = await this.bookRepository
+            Book? book = await this.bookRepository
                 .GetByIdAsync(bookId);
 
-            if (movie == null)
+            if (book == null)
             {
                 return false;
             }
@@ -90,6 +131,45 @@ namespace BookApp.Services.Data
             if (applicationUserBook != null)
             {
                 await this.userBookRepository.DeleteAsync(applicationUserBook);
+            }
+
+            return true;
+        }
+
+        public async Task<bool> MarkBookAsReadAsync(int bookId, string userId)
+        {
+            Book? book = await bookRepository
+                .GetByIdAsync(bookId);
+
+            if (book == null || userId == null)
+            {
+                return false;
+            }
+
+            await this.RemoveFromUserWantToReadListAsync(bookId, userId);
+            await this.readListService.AddBookToUserBookListAsync(bookId, userId);
+
+            return true;
+        }
+
+        public async Task<bool> IsBookInWantToReadListAsync(int bookId, string userId)
+        {
+            var userBook = await userBookRepository
+                .FirstOrDefaultAsync(ub => ub.BookId == bookId && ub.ApplicationUserId == userId && ub.IsWantToRead);
+
+            return userBook != null;
+        }
+
+        public async Task<bool> MoveBookToWantToReadListAsync(int bookId, string userId)
+        {
+            var userBook = await userBookRepository
+                .FirstOrDefaultAsync(ub => ub.BookId == bookId && ub.ApplicationUserId == userId);
+
+            if (userBook != null)
+            {
+                userBook.IsRead = false; 
+                userBook.IsWantToRead = true; 
+                await userBookRepository.UpdateAsync(userBook);
             }
 
             return true;

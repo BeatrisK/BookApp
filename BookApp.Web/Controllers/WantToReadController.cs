@@ -1,4 +1,5 @@
 ﻿using BookApp.Data.Models;
+using BookApp.Services.Data;
 using BookApp.Services.Data.Interfaces;
 using BookApp.Web.ViewModels.Lists;
 using Microsoft.AspNetCore.Identity;
@@ -10,12 +11,15 @@ namespace BookApp.Web.Controllers
     public class WantToReadController : Controller
     {
         private readonly IWantToReadService wantToReadService;
+        private readonly IReadListService readListService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public WantToReadController(IWantToReadService wantToReadService, UserManager<ApplicationUser> userManager)
+        public WantToReadController(IWantToReadService wantToReadService, UserManager<ApplicationUser> userManager,
+            IReadListService readListService)
         {
             this.wantToReadService = wantToReadService;
             this.userManager = userManager;
+            this.readListService = readListService;
         }
 
         [HttpGet]
@@ -76,6 +80,27 @@ namespace BookApp.Web.Controllers
             }
 
             return this.RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MarkAsRead(int bookId)
+        {
+            string userId = this.userManager.GetUserId(User)!;
+
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return this.RedirectToPage("/Identity/Account/Login");
+            }
+
+            bool result = await this.wantToReadService
+                .MarkBookAsReadAsync(bookId, userId);
+
+            if (result == false)
+            {
+                return this.RedirectToAction("Index", "Book");
+            }
+
+            return this.RedirectToAction("Index", "ReadList");
         }
     }
 }

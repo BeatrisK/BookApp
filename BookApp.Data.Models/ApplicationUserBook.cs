@@ -9,5 +9,9 @@
         public int BookId { get; set; }
 
         public virtual Book Book { get; set; } = null!;
+
+        public bool IsRead { get; set; }
+
+        public bool IsWantToRead { get; set; }
     }
 }
