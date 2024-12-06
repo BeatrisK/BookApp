@@ -3,15 +3,15 @@
     using BookApp.Services.Data.Interfaces;
     using BookApp.Web.ViewModels.Book;
 	using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore.Metadata.Internal;
-    using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
     public class BookController : Controller
     {
         private readonly IBookService bookService;
-        public BookController(IBookService bookService)
+        private readonly IReviewService reviewService;
+        public BookController(IBookService bookService, IReviewService reviewService)
         {
             this.bookService = bookService;
+            this.reviewService = reviewService;
         }
 
         [HttpGet]
@@ -118,6 +118,14 @@
             }
 
             return this.RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Reviews()
+        {                
+           var reviews = this.reviewService.IndexGetAllAsync();
+
+            return View(reviews);
         }
     }
 }

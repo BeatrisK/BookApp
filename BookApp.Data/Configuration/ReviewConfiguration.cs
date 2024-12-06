@@ -28,6 +28,11 @@
                 .HasMaxLength(ReviewTextMaxLength);
 
             builder
+                .Property(b => b.IsDeleted)
+                .IsRequired()
+                .HasDefaultValue(false);
+
+            builder
                 .HasOne(r => r.Book)
                 .WithMany(b => b.Reviews)
                 .HasForeignKey(r => r.BookId)

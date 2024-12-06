@@ -2,9 +2,9 @@
 {
     public class WantToReadList
     {
-        public int Id { get; set; }  
+        public int Id { get; set; }
 
-        public string UserId { get; set; }  
+        public string UserId { get; set; } = null!;
         public ApplicationUser User { get; set; } = null!;
 
         public int BookId { get; set; }

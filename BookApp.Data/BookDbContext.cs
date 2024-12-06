@@ -27,7 +27,9 @@ namespace BookApp.Data
 
         public virtual DbSet<Review> Reviews { get; set; }
 
-        public virtual DbSet<Shelve> Shelves { get; set; }
+        public virtual DbSet<ReadList> ReadLists { get; set; }
+
+        public virtual DbSet<WantToReadList> WantToReadLists { get; set; }
 
         public virtual DbSet<ApplicationUserBook> UsersBooks { get; set; }
 

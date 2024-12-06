@@ -40,6 +40,7 @@ namespace BookApp.Web
             builder.Services.AddScoped<IMyBookService, MyBookService>();
             builder.Services.AddScoped<IWantToReadService, WantToReadService>();
             builder.Services.AddScoped<IReadListService, ReadListService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

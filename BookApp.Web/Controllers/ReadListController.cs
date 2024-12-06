@@ -1,6 +1,7 @@
 ﻿using BookApp.Data.Models;
 using BookApp.Services.Data.Interfaces;
 using BookApp.Web.ViewModels.Lists;
+using BookApp.Web.ViewModels.Review;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,13 @@ namespace BookApp.Web.Controllers
     public class ReadListController : Controller
     {
         private readonly IReadListService readListService;
+        private readonly IReviewService reviewService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ReadListController(IReadListService readListService, UserManager<ApplicationUser> userManager)
+        public ReadListController(IReadListService readListService, IReviewService reviewService, UserManager<ApplicationUser> userManager)
         {
             this.readListService = readListService;
+            this.reviewService = reviewService;
             this.userManager = userManager;
         }
 
@@ -49,7 +52,6 @@ namespace BookApp.Web.Controllers
 
             if (result == false)
             {
-                //TempData[nameof(AddToWatchlistNotSuccessfulMessage)] = AddToWatchlistNotSuccessfulMessage;
                 return this.RedirectToAction("Index", "Movie");
             }
 
@@ -76,5 +78,6 @@ namespace BookApp.Web.Controllers
 
             return this.RedirectToAction(nameof(Index));
         }
+      
     }
 }

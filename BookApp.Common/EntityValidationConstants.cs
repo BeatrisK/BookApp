@@ -20,8 +20,6 @@
         {
             public const int NameMaxLength = 50;
             public const int NameMinLength = 5;
-            public const int BiographyMaxLength = 500;
-            public const int BiographyMinLength = 50;
         }
 
         public static class Review
@@ -29,16 +27,8 @@
             public const int RatingMaxValue = 5;
             public const int RatingMinValue = 1;
             public const string ReviewDateFormat = "MM/yyyy";
-            public const int ReviewTextMaxLength = 500;
+            public const int ReviewTextMaxLength = 2000;
             public const int ReviewTextMinLength = 50;
-        }
-
-        public static class Shelves
-        {
-            public const int NameMaxLength = 50;
-            public const int NameMinLength = 5;
-            public const int DescriptionMaxLength = 500;
-            public const int DescriptionMinLength = 50;
         }
     }
 }

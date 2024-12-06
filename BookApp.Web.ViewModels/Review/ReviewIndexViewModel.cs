@@ -1,10 +1,12 @@
-﻿namespace BookApp.Data.Models
+﻿namespace BookApp.Web.ViewModels.Review
 {
-    public class Review
-    {
-        public int Id { get; set; }
+    using BookApp.Data.Models;
 
+    public class ReviewIndexViewModel
+    {
         public int BookId { get; set; }
+        public string BookTitle { get; set; } = null!;
+        public string BookAuthor { get; set; } = null!;
         public Book Book { get; set; } = null!;
 
         public int Rating { get; set; }
@@ -12,7 +14,5 @@
         public string ReviewText { get; set; } = null!;
 
         public DateTime ReviewDate { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }

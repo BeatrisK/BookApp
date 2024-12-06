@@ -4,6 +4,7 @@ using BookApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookApp.Data.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205213417_AddIsDeletedToReview")]
+    partial class AddIsDeletedToReview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,7 +226,7 @@ namespace BookApp.Data.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<int>("Rating")
-                        .HasMaxLength(2000)
+                        .HasMaxLength(500)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReviewDate")
@@ -231,8 +234,8 @@ namespace BookApp.Data.Migrations
 
                     b.Property<string>("ReviewText")
                         .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
 

@@ -37,10 +37,9 @@
                                 <small>By <a asp-action="Index" asp-controller="Author" asp-route-id="@book.AuthorId" class="text-muted text-decoration-none">@book.AuthorName</a></small>
                             </p>
                             <div class="mt-auto d-flex gap-2 justify-content-center">
-                                <a asp-action="WriteReview" asp-route-id="@book.BookId" class="btn btn-success btn-sm w-100 py-2">
-                                    <i class="bi bi-check-circle"></i> Write Review
+                                <a asp-controller="Review" asp-action="Add" asp-route-bookId="@book.BookId" class="btn btn-success btn-sm">
+                                    <i class="bi bi-pencil"></i> Write Review
                                 </a>
-
                                 <form method="post" action="@Url.Action("RemoveFromReadList", "ReadList")" style="display:inline;">
                                     @Html.AntiForgeryToken() 
                                     <input type="hidden" name="bookId" value="@book.BookId" />

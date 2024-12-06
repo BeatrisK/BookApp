@@ -4,17 +4,20 @@
     using BookApp.Data.Models.Repository.Interfaces;
     using BookApp.Services.Data.Interfaces;
     using BookApp.Web.ViewModels.Lists;
+    using BookApp.Web.ViewModels.Review;
     using Microsoft.EntityFrameworkCore;
 
     public class ReadListService : IReadListService
     {
         private IRepository<Book, int> bookRepository;
+        private IRepository<Review, int> reviewRepository;
         private IRepository<ApplicationUserBook, object> userBookRepository;
 
-        public ReadListService(IRepository<Book, int> bookRepository, IRepository<ApplicationUserBook, object> userBookRepository)
+        public ReadListService(IRepository<Book, int> bookRepository,  IRepository<ApplicationUserBook, object> userBookRepository, IRepository<Review, int> reviewRepository)
         {
             this.bookRepository = bookRepository;
             this.userBookRepository = userBookRepository;
+            this.reviewRepository = reviewRepository;
         }
 
         public async Task<IEnumerable<ApplicationUserListsViewModel>> GetUserReadListByIdAsync(string id)
@@ -95,7 +98,8 @@
         public async Task<bool> IsBookInReadListAsync(int bookId, string userId)
         {
             var userBook = await userBookRepository
-                    .FirstOrDefaultAsync(ub => ub.BookId == bookId && ub.ApplicationUserId == userId && ub.IsRead);
+                    .FirstOrDefaultAsync(ub => ub.BookId == bookId && 
+                    ub.ApplicationUserId == userId && ub.IsRead);
 
             return userBook != null;
         }
