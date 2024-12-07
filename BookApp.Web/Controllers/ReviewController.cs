@@ -2,9 +2,11 @@
 {
     using BookApp.Data.Models;
     using BookApp.Services.Data.Interfaces;
+    using BookApp.Web.ViewModels.Book;
     using BookApp.Web.ViewModels.Review;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
     public class ReviewController : Controller
     {
@@ -28,7 +30,6 @@
             return View(books);
         }
 
-
         [HttpGet]
         public IActionResult Add(int bookId)
         {
@@ -39,7 +40,6 @@
 
             return View(model);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Add(AddReviewViewModel model)
@@ -65,6 +65,40 @@
             await this.reviewService.AddReviewAsync(model);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            EditReviewViewModel? formModel = await this.reviewService
+                .GetReviewForEditByIdAsync(id);
+
+            if (formModel == null)
+            {
+                return this.RedirectToAction(nameof(Index));
+            }
+
+            return this.View(formModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditReviewViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            bool isUpdated = await this.reviewService
+                .EditReviewAsync(model);
+
+            if (!isUpdated)
+            {
+                ModelState.AddModelError(string.Empty, "Unexpected error occurred while updating the review! Please contact administrator");
+                return this.View(model);
+            }
+
+            return this.RedirectToAction(nameof(Index), "Review", new { id = model.Id });
         }
     }
 }

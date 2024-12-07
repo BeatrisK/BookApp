@@ -62,14 +62,41 @@
             await this.reviewRepository.AddAsync(review);
         }
 
-        public Task<EditReviewViewModel> GetReviewForEditByIdAsync(int id)
+        public async Task<EditReviewViewModel> GetReviewForEditByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            Review? review = await this.reviewRepository
+               .GetAllAttached()
+               .Include(r => r.Book)
+               .Where(r => r.IsDeleted == false)
+               .FirstOrDefaultAsync(r => r.Id == id);
+
+            var reviewModel = new EditReviewViewModel()
+            {
+                Id = review.Id,
+                BookId = review.BookId,
+                Rating = review.Rating,
+                ReviewText = review.ReviewText,
+                ReviewDate = review.ReviewDate,
+            };
+
+            return reviewModel;
         }
 
-        public Task<bool> EditReviewAsync(EditReviewViewModel model)
+        public async Task<bool> EditReviewAsync(EditReviewViewModel model)
         {
-            throw new NotImplementedException();
+            var book = await bookRepository.FirstOrDefaultAsync(b => b.Id == model.BookId);
+
+            var review = new Review
+            {
+                Id = model.Id,
+                BookId = book.Id,
+                Rating= model.Rating,
+                ReviewText = model.ReviewText,
+                ReviewDate = model.ReviewDate,
+            };
+
+            bool result = await this.reviewRepository.UpdateAsync(review);
+            return result;
         }
 
         public Task<DeleteReviewViewModel?> GetReviewForDeleteByIdAsync(int id)

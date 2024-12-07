@@ -1,18 +1,17 @@
 ﻿namespace BookApp.Web.ViewModels.Review
 {
-    using BookApp.Data.Models;
     using static BookApp.Common.EntityValidationConstants.Review;
     using System.ComponentModel.DataAnnotations;
 
     public class EditReviewViewModel
     {
-        [Required]
-        public int BookId { get; set; }
-        public Book Book { get; set; } = null!;
+        public int Id { get; set; }
 
         [Required]
-        [MaxLength(RatingMaxValue)]
-        [MinLength(RatingMinValue)]
+        public int BookId { get; set; }
+
+        [Required]
+        [Range(RatingMinValue, RatingMaxValue)]
         public int Rating { get; set; }
 
         [Required]
