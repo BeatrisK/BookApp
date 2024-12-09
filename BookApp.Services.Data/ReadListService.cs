@@ -4,7 +4,6 @@
     using BookApp.Data.Models.Repository.Interfaces;
     using BookApp.Services.Data.Interfaces;
     using BookApp.Web.ViewModels.Lists;
-    using BookApp.Web.ViewModels.Review;
     using Microsoft.EntityFrameworkCore;
 
     public class ReadListService : IReadListService

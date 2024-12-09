@@ -10,10 +10,12 @@ namespace BookApp.Services.Data.Interfaces
 
         Task<EditReviewViewModel> GetReviewForEditByIdAsync(int id);
 
-        public Task<bool> EditReviewAsync(EditReviewViewModel model);
+        Task<bool> EditReviewAsync(EditReviewViewModel model);
 
-        public Task<DeleteReviewViewModel?> GetReviewForDeleteByIdAsync(int id);
+        Task<DeleteReviewViewModel?> GetReviewForDeleteByIdAsync(int id);
 
-        public Task<bool> SoftDeleteReviewAsync(int id);
+        Task<bool> SoftDeleteReviewAsync(int id);
+
+        Task<bool> UserHasWrittenReviewForBookAsync(int bookId, string userId);
     }
 }

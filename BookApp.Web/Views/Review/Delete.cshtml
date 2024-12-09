@@ -1,0 +1,20 @@
+﻿﻿@using BookApp.Web.ViewModels.Review
+@model DeleteReviewViewModel
+
+<h2>Delete Review</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<p>Are you sure you want to delete the review for: <strong>@Model.Book.Title</strong>?</p>
+
+<form asp-action="SoftDeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

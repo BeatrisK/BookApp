@@ -14,6 +14,12 @@
                 .HasKey(r => r.Id);
 
             builder
+                .HasOne(b => b.User)
+                .WithMany()
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
                 .Property(r => r.ReviewDate)
                 .IsRequired();
 

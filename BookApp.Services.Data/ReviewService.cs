@@ -3,19 +3,26 @@
     using BookApp.Data.Models;
     using BookApp.Data.Models.Repository.Interfaces;
     using BookApp.Services.Data.Interfaces;
-    using BookApp.Web.ViewModels.Book;
     using BookApp.Web.ViewModels.Review;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using System.Net.Http;
+    using System.Security.Claims;
 
     public class ReviewService : IReviewService
     {
         private IRepository<Review, int> reviewRepository;
         private IRepository<Book, int> bookRepository;
+        private IRepository<ApplicationUser, string> applicationUserRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ReviewService(IRepository<Review, int> reviewRepository, IRepository<Book, int> bookRepository)
+        public ReviewService(IRepository<Review, int> reviewRepository, IRepository<Book, int> bookRepository,
+            IRepository<ApplicationUser, string> applicationUserRepository, UserManager<ApplicationUser> userManager)
         {
             this.reviewRepository = reviewRepository;
             this.bookRepository = bookRepository;
+            this.applicationUserRepository = applicationUserRepository;
+            this.userManager = userManager;
         }
 
         public async Task<IEnumerable<ReviewIndexViewModel>> IndexGetAllAsync()
@@ -26,13 +33,13 @@
                 .Where(r => r.IsDeleted == false)
                 .Select(r => new ReviewIndexViewModel
                 {
+                    Id = r.Id,
                     BookId = r.Book.Id,
-                    BookTitle = r.Book.Title,
-                    BookAuthor = r.Book.Author.Name,
                     Book = r.Book,
                     Rating = r.Rating,
                     ReviewText = r.ReviewText,
                     ReviewDate = r.ReviewDate,
+                    UserId = r.UserId
                 })
                 .ToArrayAsync();
 
@@ -50,19 +57,29 @@
                 throw new InvalidOperationException($"Book with ID {model.BookId} was not found.");
             }
 
+            var existingReview = await this.reviewRepository
+                .GetAllAttached()
+                .FirstOrDefaultAsync(r => r.BookId == model.BookId && r.UserId == model.UserId && r.IsDeleted == false);
+
+            if (existingReview != null)
+            {
+                throw new InvalidOperationException("You have already written a review for this book.");
+            }
+
             Review review = new Review
             {
                 Id = model.Id,
                 BookId = book.Id,
                 Rating = model.Rating,
                 ReviewText = model.ReviewText,
-                ReviewDate = model.ReviewDate
+                ReviewDate = model.ReviewDate,
+                UserId = model.UserId
             };
 
             await this.reviewRepository.AddAsync(review);
         }
 
-        public async Task<EditReviewViewModel> GetReviewForEditByIdAsync(int id)
+        public async Task<EditReviewViewModel> GetReviewForEditByIdAsync(int id) 
         {
             Review? review = await this.reviewRepository
                .GetAllAttached()
@@ -75,8 +92,9 @@
                 Id = review.Id,
                 BookId = review.BookId,
                 Rating = review.Rating,
-                ReviewText = review.ReviewText,
+                ReviewText = review.ReviewText ?? string.Empty,
                 ReviewDate = review.ReviewDate,
+                UserId = review.UserId ?? string.Empty
             };
 
             return reviewModel;
@@ -84,29 +102,68 @@
 
         public async Task<bool> EditReviewAsync(EditReviewViewModel model)
         {
-            var book = await bookRepository.FirstOrDefaultAsync(b => b.Id == model.BookId);
+            var review = await reviewRepository
+           .GetAllAttached()
+           .FirstOrDefaultAsync(r => r.Id == model.Id && !r.IsDeleted);
 
-            var review = new Review
+            if (review == null)
             {
-                Id = model.Id,
-                BookId = book.Id,
-                Rating= model.Rating,
-                ReviewText = model.ReviewText,
-                ReviewDate = model.ReviewDate,
-            };
+                return false;
+            }
 
-            bool result = await this.reviewRepository.UpdateAsync(review);
-            return result;
+            if (review.UserId != model.UserId)
+            {
+                throw new UnauthorizedAccessException("You do not have permission to edit this review.");
+            }
+
+            review.Rating = model.Rating;
+            review.ReviewText = model.ReviewText;
+            review.ReviewDate = model.ReviewDate;
+
+            return await reviewRepository.UpdateAsync(review);
         }
 
-        public Task<DeleteReviewViewModel?> GetReviewForDeleteByIdAsync(int id)
+         public async Task<DeleteReviewViewModel?> GetReviewForDeleteByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            DeleteReviewViewModel? review = await this.reviewRepository
+                .GetAllAttached()
+                .Where(c => c.IsDeleted == false)
+                .Select(b => new DeleteReviewViewModel()
+                {
+                    Id = b.Id,
+                    Book = b.Book,
+                })
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            return review;
         }
 
-        public Task<bool> SoftDeleteReviewAsync(int id)
+        public async Task<bool> SoftDeleteReviewAsync(int id)
         {
-            throw new NotImplementedException();
+            Review? reviewToDelete = await this.reviewRepository
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (reviewToDelete == null)
+            {
+                return false;
+            }
+
+            reviewToDelete.IsDeleted = true;
+            return await this.reviewRepository.UpdateAsync(reviewToDelete);
+        }
+
+        public async Task<bool> UserHasWrittenReviewForBookAsync(int bookId, string userId)
+        {
+            var user = await applicationUserRepository.GetByIdAsync(userId);
+            if (user == null)
+            {
+                return false;
+            }
+
+            var review = await reviewRepository
+                .FirstOrDefaultAsync(r => r.BookId == bookId && r.UserId == userId && !r.IsDeleted);
+
+            return review != null;
         }
     }
 }

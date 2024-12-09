@@ -7,6 +7,8 @@
     {
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
         [Required]
         [MaxLength(TitleMaxLength)]
         [MinLength(TitleMinLength)]
