@@ -121,9 +121,9 @@
         }
 
         [HttpPost]
-        public IActionResult Reviews()
+        public IActionResult Reviews(int bookId)
         {                
-           var reviews = this.reviewService.IndexGetAllAsync();
+           var reviews = this.reviewService.IndexGetAllAsync(bookId);
 
             return View(reviews);
         }

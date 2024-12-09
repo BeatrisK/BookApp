@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using static BookApp.Common.EntityValidationConstants;
 
     [Authorize]
     public class ReviewController : Controller
@@ -23,15 +24,15 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int bookId)
         {
             var userId = this.userManager.GetUserId(User);
             ViewData["UserId"] = userId;
 
-            IEnumerable<ReviewIndexViewModel> books =
-                await this.reviewService.IndexGetAllAsync();
+            IEnumerable<ReviewIndexViewModel> reviews =
+                await this.reviewService.IndexGetAllAsync(bookId);
 
-            return View(books);
+            return View(reviews);
         }
 
         [HttpGet]
@@ -109,8 +110,12 @@
                 return this.RedirectToAction(nameof(Index));
             }
 
-            string userId =  this.userManager.GetUserId(User);
-            formModel.UserId = userId;
+            string currentUserId = this.userManager.GetUserId(User);
+
+            if (formModel.UserId != currentUserId)
+            { 
+                return Unauthorized("You are not authorized to edit this review.");
+            }
 
             return this.View(formModel);
         }

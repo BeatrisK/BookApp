@@ -4,7 +4,7 @@ namespace BookApp.Services.Data.Interfaces
 {
     public interface IReviewService
     {
-        Task<IEnumerable<ReviewIndexViewModel>> IndexGetAllAsync();
+        Task<IEnumerable<ReviewIndexViewModel>> IndexGetAllAsync(int bookId);
 
         Task AddReviewAsync(AddReviewViewModel model);
 

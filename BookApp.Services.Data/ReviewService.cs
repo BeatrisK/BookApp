@@ -25,12 +25,12 @@
             this.userManager = userManager;
         }
 
-        public async Task<IEnumerable<ReviewIndexViewModel>> IndexGetAllAsync()
+        public async Task<IEnumerable<ReviewIndexViewModel>> IndexGetAllAsync(int bookId)
         {
             IEnumerable<ReviewIndexViewModel> review = await this.reviewRepository
                 .GetAllAttached()
                 .Include(r => r.Book)
-                .Where(r => r.IsDeleted == false)
+                .Where(r => r.IsDeleted == false && r.BookId == bookId)
                 .Select(r => new ReviewIndexViewModel
                 {
                     Id = r.Id,

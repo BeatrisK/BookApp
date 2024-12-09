@@ -1,0 +1,33 @@
+﻿@using BookApp.Web.ViewModels.Review
+@model AddReviewViewModel
+
+<h2>Write a Review</h2>
+
+<form method="post" asp-action="Add" asp-controller="Review">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="BookId" value="@Model.BookId" />
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+
+    <div class="form-group">
+        <label for="Rating">Rating (1-5):</label>
+        <input type="number" id="Rating" name="Rating" class="form-control" min="1" max="5" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ReviewText">Review:</label>
+        <textarea id="ReviewText" name="ReviewText" class="form-control" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ReviewDate">Date:</label>
+        <input type="date" id="ReviewDate" name="ReviewDate" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

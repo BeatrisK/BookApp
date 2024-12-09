@@ -1,0 +1,76 @@
+﻿@using BookApp.Web.ViewModels.Review
+@model IEnumerable<ReviewIndexViewModel>
+
+<h2>Reviews for @Model.FirstOrDefault()?.Book.Title</h2>
+
+@if (Model.Any())
+{
+    <div class="reviews-container">
+        @foreach (var review in Model)
+        {
+            <div class="review-box">
+                <h4>Rating: @review.Rating/5</h4>
+                <p>@review.ReviewText</p>
+                <p><small>Posted on: @review.ReviewDate.ToString("MM/dd/yyyy")</small></p>
+
+                @{
+                    var userId = ViewData["UserId"] as string;
+                }
+
+                @if (User.Identity.IsAuthenticated && review.UserId == userId)
+                {
+                    <div class="action-buttons">
+                        <a href="@Url.Action("Edit", "Review", new { id = review.Id })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "Review", new { id = review.Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this review?')">Delete</a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No reviews are available for this book yet.</p>
+}
+
+<style>
+    .reviews-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .review-box {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        position: relative; 
+        min-height: 150px; 
+    }
+
+        .review-box h4 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .review-box p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        bottom: 10px; 
+        right: 10px; 
+    }
+
+        .action-buttons .btn {
+            margin-right: 5px;
+        }
+</style>
