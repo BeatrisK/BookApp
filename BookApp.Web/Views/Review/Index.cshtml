@@ -1,10 +1,21 @@
 ﻿@using BookApp.Web.ViewModels.Review
 @model IEnumerable<ReviewIndexViewModel>
 
-<h2>Reviews for @Model.FirstOrDefault()?.Book.Title</h2>
+@{
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">
+        @successMessage
+    </div>
+}
 
 @if (Model.Any())
 {
+    <h2>Reviews for @Model.FirstOrDefault()?.Book.Title</h2>
+
     <div class="reviews-container">
         @foreach (var review in Model)
         {

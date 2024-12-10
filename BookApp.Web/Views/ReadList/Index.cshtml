@@ -37,7 +37,7 @@
                                 <small>By <a asp-action="Index" asp-controller="Author" asp-route-id="@book.AuthorId" class="text-muted text-decoration-none">@book.AuthorName</a></small>
                             </p>
                             <div class="mt-auto d-flex gap-2 justify-content-center">
-                                <a asp-controller="Review" asp-action="Add" asp-route-bookId="@book.BookId" class="btn btn-success btn-sm">
+                                <a asp-controller="Review" asp-action="Add" asp-route-bookId="@book.BookId" class="btn btn-success btn-sm d-flex align-items-center justify-content-center">
                                     <i class="bi bi-pencil"></i> Write Review
                                 </a>
                                 <form method="post" action="@Url.Action("RemoveFromReadList", "ReadList")" style="display:inline;">

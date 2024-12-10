@@ -50,7 +50,7 @@
             if (existingReview)
             {
                 TempData["ErrorMessage"] = "You have already written a review for this book.";
-                return RedirectToAction("Index", "MyBook"); 
+                return RedirectToAction("Index"); 
             }
 
             var model = new AddReviewViewModel
@@ -84,19 +84,10 @@
                 return Unauthorized("You can only review books from your ReadList.");
             }
 
-            bool hasWrittenReview = await this.reviewService
-                .UserHasWrittenReviewForBookAsync(model.BookId, userId);
-
-            if (hasWrittenReview)
-            {
-                TempData["ErrorMessage"] = "You have already written a review for this book.";
-                return RedirectToAction(nameof(Index));
-            }
-
             await this.reviewService.AddReviewAsync(model);
 
             TempData["SuccessMessage"] = "Review successfully updated!";
-            return RedirectToAction(nameof(Index));
+            return this.RedirectToAction(nameof(Index), "Review", new { bookId = model.BookId });
         }
 
         [HttpGet]
@@ -142,7 +133,8 @@
                 return this.View(model);
             }
 
-            return this.RedirectToAction(nameof(Index), "Review", new { id = model.Id });
+            TempData["SuccessMessage"] = "Review successfully updated!";
+            return this.RedirectToAction(nameof(Index), "Review", new { bookId = model.BookId });
         }
 
         [HttpGet]
@@ -153,7 +145,7 @@
 
             if (reviewToDeleteViewModel == null)
             {
-                return this.RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(Index), "Review", new { bookId = id });
             }
 
             return this.View(reviewToDeleteViewModel);
@@ -172,7 +164,8 @@
                 return this.RedirectToAction(nameof(Delete), new { id = review.Id });
             }
 
-            return this.RedirectToAction(nameof(Index));
+            TempData["SuccessMessage"] = "Review successfully deleted!";
+            return this.RedirectToAction(nameof(Index), "Review", new { bookId = review.BookId });
         }
     }
 }

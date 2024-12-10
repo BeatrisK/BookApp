@@ -6,8 +6,6 @@
     using BookApp.Web.ViewModels.Review;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using System.Net.Http;
-    using System.Security.Claims;
 
     public class ReviewService : IReviewService
     {
@@ -124,7 +122,7 @@
         }
 
          public async Task<DeleteReviewViewModel?> GetReviewForDeleteByIdAsync(int id)
-        {
+         {
             DeleteReviewViewModel? review = await this.reviewRepository
                 .GetAllAttached()
                 .Where(c => c.IsDeleted == false)
@@ -132,6 +130,7 @@
                 {
                     Id = b.Id,
                     Book = b.Book,
+                    BookId = b.BookId
                 })
                 .FirstOrDefaultAsync(b => b.Id == id);
 
