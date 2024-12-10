@@ -6,6 +6,7 @@ using BookApp.Data.Models.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BookApp.Data.Models;
+using BookApp.Web.Infrastructure.Extensions;
 
 namespace BookApp.Web
 {
@@ -14,6 +15,9 @@ namespace BookApp.Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            string adminEmail = builder.Configuration.GetValue<string>("Administrator:Email")!;
+            string adminPassword = builder.Configuration.GetValue<string>("Administrator:Password")!;
 
             string? connString = builder.Configuration
                 .GetConnectionString("SQLServer");
@@ -41,6 +45,7 @@ namespace BookApp.Web
             builder.Services.AddScoped<IWantToReadService, WantToReadService>();
             builder.Services.AddScoped<IReadListService, ReadListService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -63,6 +68,12 @@ namespace BookApp.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator(adminEmail, adminPassword);
+
+            app.MapControllerRoute(
+                name: "admin",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
