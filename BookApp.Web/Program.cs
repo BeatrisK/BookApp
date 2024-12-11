@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BookApp.Data.Models;
 using BookApp.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BookApp.Web
 {
@@ -37,6 +38,11 @@ namespace BookApp.Web
                 .AddRoles<IdentityRole>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddUserManager<UserManager<ApplicationUser>>();
+
+            builder.Services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/Identity/Account/Login";
+            });
 
             builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
             builder.Services.AddScoped<IBookService, BookService>();
