@@ -2,7 +2,8 @@
 {
     using BookApp.Services.Data.Interfaces;
     using BookApp.Web.ViewModels.Book;
-	using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     public class BookController : Controller
     {
@@ -24,12 +25,16 @@
         }
 
         [HttpGet]
+        [Area("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Area("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateBookViewModel model)
         {
             if (!ModelState.IsValid)
@@ -57,6 +62,8 @@
         }
 
         [HttpGet]
+        [Area("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             EditBookViewModel? formModel = await this.bookService
@@ -71,7 +78,9 @@
         }
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(EditBookViewModel model)
+        [Area("Admin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(EditBookViewModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -105,6 +114,8 @@
         }
 
         [HttpPost]
+        [Area("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SoftDeleteConfirmed(DeleteBookViewModel book)
         {
             bool isDeleted = await this.bookService

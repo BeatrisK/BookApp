@@ -2,12 +2,14 @@
 using BookApp.Services.Data;
 using BookApp.Services.Data.Interfaces;
 using BookApp.Web.ViewModels.Lists;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace BookApp.Web.Controllers
 {
+    [Authorize]
     public class WantToReadController : Controller
     {
         private readonly IWantToReadService wantToReadService;

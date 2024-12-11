@@ -2,11 +2,13 @@
 using BookApp.Services.Data.Interfaces;
 using BookApp.Web.ViewModels.Lists;
 using BookApp.Web.ViewModels.Review;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookApp.Web.Controllers
 {
+    [Authorize]
     public class ReadListController : Controller
     {
         private readonly IReadListService readListService;
