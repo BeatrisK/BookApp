@@ -1,79 +1,80 @@
 ﻿@using BookApp.Web.ViewModels.Admin.UserManagеment
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @model IEnumerable<AllUsersViewModel>
+
+@inject RoleManager<IdentityRole> roleManager
 
 @{
     ViewData["Title"] = "User Management";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Извличаме всички роли от базата данни
+    IEnumerable<string?> allRoles = await roleManager.Roles
+        .Select(r => r.Name)
+        .ToArrayAsync();
 }
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4 text-primary">User Management</h1>
+    <h1 class="text-center mb-4 text-dark">User Management</h1>
 
-    <div class="table-responsive">
-        <table class="table table-hover table-striped shadow-sm rounded-3">
-            <thead class="bg-primary text-white">
-                <tr class="text-center">
-                    <th>Email</th>
-                    <th>Roles</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in Model)
-                {
-                    <tr class="align-middle">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                    <tr>
                         <td>@user.Email</td>
                         <td>
-                            @foreach (var role in user.Roles)
-                            {
-                                <span class="badge bg-info">@role</span>
-                            }
+                        @foreach (var role in user.Roles)
+                        {
+                                    <span class="badge bg-secondary">@role</span>
+                        }
                         </td>
-                        <td class="text-center">
-                            <form method="post" asp-action="AssignRole" asp-controller="UserManagement" asp-area="Admin" class="d-inline">
-                                <input type="hidden" name="userId" value="@user.Id" />
-                                <div class="input-group mb-2">
-                                    <select name="role" class="form-select">
-   
-                                        <option value="Admin">Admin</option>
-                                        <option value="User">User</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-outline-success btn-sm ms-2">
-                                        <i class="fas fa-user-plus"></i> Assign
-                                    </button>
-                                </div>
-                            </form>
+                        <td>
+                            <!-- Контейнер за всички форми с "d-flex" за изравняване -->
+                            <div class="d-flex justify-content-between gap-3">
 
-                            <form method="post" asp-action="RemoveRole" asp-controller="UserManagement" asp-area="Admin" class="d-inline ms-2">
-                                <input type="hidden" name="userId" value="@user.Id" />
-                                <div class="input-group mb-2">
-                                    <select name="role" class="form-select">
-                                        @foreach (var role in user.Roles)
-                                        {
-                                            <option value="@role">@role</option>
-                                        }
+                                <!-- Assign Role Form -->
+                                <form method="post" asp-action="AssignRole" asp-controller="UserManagement" asp-area="Admin" class="d-inline w-100">
+                                    <input type="hidden" name="userId" value="@user.Id" />
+                                    <select name="role" class="form-select form-select-sm w-100">
+                                    @foreach (string role in allRoles)
+                                    {
+                                                <option value="@role">@role</option>
+                                    }
                                     </select>
-                                    <button type="submit" class="btn btn-outline-warning btn-sm ms-2">
-                                        <i class="fas fa-user-times"></i> Remove
-                                    </button>
-                                </div>
-                            </form>
+                                    <button type="submit" class="btn btn-success btn-sm w-100 mt-2">Assign</button>
+                                </form>
 
-                            <form method="post" asp-action="DeleteUser" asp-controller="UserManagement" asp-area="Admin" class="d-inline ms-2">
-                                <input type="hidden" name="userId" value="@user.Id" />
-                                <button type="submit" class="btn btn-outline-danger btn-sm ms-2">
-                                    <i class="fas fa-trash-alt"></i> Delete
-                                </button>
-                            </form>
+                                <!-- Remove Role Form -->
+                                <form method="post" asp-action="RemoveRole" asp-controller="UserManagement" asp-area="Admin" class="d-inline w-100">
+                                    <input type="hidden" name="userId" value="@user.Id" />
+                                    <select name="role" class="form-select form-select-sm w-100">
+                                    @foreach (var role in user.Roles)
+                                    {
+                                                <option value="@role">@role</option>
+                                    }
+                                    </select>
+                                    <button type="submit" class="btn btn-warning btn-sm w-100 mt-2">Remove</button>
+                                </form>
+
+                                <!-- Delete User Form -->
+                                <form method="post" asp-action="DeleteUser" asp-controller="UserManagement" asp-area="Admin" class="d-inline w-100">
+                                    <input type="hidden" name="userId" value="@user.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm w-100 mt-2">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>
 
-@section Scripts {
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-}
 

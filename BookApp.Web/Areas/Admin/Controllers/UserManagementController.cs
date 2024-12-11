@@ -45,6 +45,7 @@ namespace BookApp.Web.Areas.Admin.Controllers
             return this.RedirectToAction(nameof(Index));
         }
 
+
         [HttpPost]
         public async Task<IActionResult> RemoveRole(string userId, string role)
         {
@@ -68,21 +69,25 @@ namespace BookApp.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string userId)
         {
-            bool userExists = await this.userService
-                .UserExistsByIdAsync(userId);
-            if (!userExists)
+            try
             {
-                return this.RedirectToAction(nameof(Index));
-            }
+                bool result = await userService.SoftDeleteUserAsync(userId);
 
-            bool removeResult = await this.userService
-                .DeleteUserAsync(userId);
-            if (!removeResult)
+                if (result)
+                {
+                    return RedirectToAction("Index"); 
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User not found or couldn't be deleted.");
+                    return View();
+                }
+            }
+            catch (Exception ex)
             {
-                return this.RedirectToAction(nameof(Index));
+                ModelState.AddModelError("", ex.Message);
+                return View();
             }
-
-            return this.RedirectToAction(nameof(Index));
         }
     }
 }

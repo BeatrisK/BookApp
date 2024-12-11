@@ -12,6 +12,6 @@
 
         Task<bool> RemoveUserRoleAsync(string userId, string roleName);
 
-        Task<bool> DeleteUserAsync(string userId);
+        Task<bool> SoftDeleteUserAsync(string userId);
     }
 }

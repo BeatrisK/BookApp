@@ -21,6 +21,7 @@
         public async Task<IEnumerable<AllUsersViewModel>> GetAllUsersAsync()
         {
             IEnumerable<ApplicationUser> allUsers = await this.userManager.Users
+                .Where(u => u.IsDeleted == false)
                 .ToArrayAsync();
             ICollection<AllUsersViewModel> allUsersViewModel = new List<AllUsersViewModel>();
 
@@ -102,18 +103,18 @@
             return true;
         }
 
-        public async Task<bool> DeleteUserAsync(string userId)
+        public async Task<bool> SoftDeleteUserAsync(string userId)
         {
-            ApplicationUser? user = await userManager
-                .FindByIdAsync(userId.ToString());
+            ApplicationUser? user = await userManager.FindByIdAsync(userId);
 
             if (user == null)
             {
                 return false;
             }
 
-            IdentityResult? result = await this.userManager
-                .DeleteAsync(user);
+            user.IsDeleted = true;
+
+            var result = await userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
             {
