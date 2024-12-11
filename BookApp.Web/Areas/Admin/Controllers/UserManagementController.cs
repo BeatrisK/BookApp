@@ -1,5 +1,5 @@
 ﻿using BookApp.Services.Data.Interfaces;
-using CinemaApp.Web.ViewModels.Admin.UserManagеment;
+using BookApp.Web.ViewModels.Admin.UserManagеment;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,14 +7,15 @@ namespace BookApp.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class UserManagementController : Controller
     {
         private readonly IUserService userService;
 
-        public AdminController(IUserService userService)
+        public UserManagementController(IUserService userService)
         {
             this.userService = userService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {

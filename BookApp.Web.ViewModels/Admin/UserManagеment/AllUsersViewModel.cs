@@ -1,4 +1,4 @@
-﻿namespace CinemaApp.Web.ViewModels.Admin.UserManagеment
+﻿namespace BookApp.Web.ViewModels.Admin.UserManagеment
 {
 
     public class AllUsersViewModel

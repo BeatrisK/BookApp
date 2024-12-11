@@ -1,6 +1,6 @@
 ﻿namespace BookApp.Services.Data.Interfaces
 {
-    using CinemaApp.Web.ViewModels.Admin.UserManagеment;
+    using BookApp.Web.ViewModels.Admin.UserManagеment;
 
     public interface IUserService
     {
