@@ -1,156 +1,160 @@
-﻿using BookApp.Data.Models;
+﻿using BookApp.Data;
+using BookApp.Data.Models;
+using BookApp.Data.Models.Repository;
 using BookApp.Data.Models.Repository.Interfaces;
 using BookApp.Services.Data;
 using BookApp.Services.Data.Interfaces;
 using BookApp.Web.ViewModels.Book;
-using Moq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookApp.Services.Tests
-{ 
+{
     [TestFixture]
-    public class BookServiceTests
+    public class BookServiceUnitTests
     {
-        private Mock<IRepository<Book, int>> mockBookRepository;
-        private Mock<IRepository<Author, int>> mockAuthorRepository;
-        private BookService bookService;
+        private BookDbContext context;
+        private IBookService bookService;
+        private IRepository<Book, int> bookRepository;
+        private IRepository<Author, int> authorRepository;
+
+        private string authorName = "J.K. Rowling";
 
         [SetUp]
-        public void SetUp()
+        public async Task Setup()
         {
-            mockBookRepository = new Mock<IRepository<Book, int>>();
-            mockAuthorRepository = new Mock<IRepository<Author, int>>();
-            bookService = new BookService(mockBookRepository.Object, mockAuthorRepository.Object);
+            var options = new DbContextOptionsBuilder<BookDbContext>()
+                .UseInMemoryDatabase(databaseName: "BookInMemoryDb" + Guid.NewGuid().ToString())
+                .Options;
+
+            context = new BookDbContext(options);
+            bookRepository = new BaseRepository<Book, int>(context);
+            authorRepository = new BaseRepository<Author, int>(context);
+
+            bookService = new BookService(bookRepository, authorRepository);
+
+            var author = new Author { Name = authorName };
+
+            context.Authors.Add(author);
+            await context.SaveChangesAsync();
+
+            var book = new Book
+            {
+                Title = "Harry Potter and the Philosopher's Stone",
+                Genre = "Fantasy",
+                Pages = 223,
+                Price = 19.99m,
+                Description = "A fantasy novel",
+                Publisher = "Bloomsbury",
+                ImageUrl = "image_url",
+                Author = author
+            };
+
+            context.Books.Add(book);
+            await context.SaveChangesAsync();
+        }
+
+        [TearDown]
+        public async Task Teardown()
+        {
+            if (context != null)
+            {
+                await context.Database.EnsureDeletedAsync();
+                await context.DisposeAsync();
+            }
         }
 
         [Test]
         public async Task IndexGetAllAsync_ShouldReturnBooks_WhenBooksExist()
         {
-            // Arrange
-            var books = new List<Book>
-            {
-                new Book { Id = 1, Title = "Book 1", IsDeleted = false, Author = new Author { Id = 1, Name = "Author 1" }},
-                new Book { Id = 2, Title = "Book 2", IsDeleted = false, Author = new Author { Id = 2, Name = "Author 2" }}
-            };
+            var books = await bookService.IndexGetAllAsync();
 
-            mockBookRepository.Setup(repo => repo.GetAllAttached())
-                .Returns(books.AsQueryable());
-
-            // Act
-            var result = await bookService.IndexGetAllAsync();
-
-            // Assert
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Count(), Is.EqualTo(2));
-            Assert.That(result.First().Title, Is.EqualTo("Book 1"));
+            Assert.That(books.Count(), Is.EqualTo(1));
+            Assert.That(books.First().Title, Is.EqualTo("Harry Potter and the Philosopher's Stone"));
+            Assert.That(books.First().AuthorName, Is.EqualTo(authorName));
         }
 
         [Test]
-        public async Task CreateBookAsync_ShouldCreateBook_WhenValidDataIsProvided()
+        public async Task CreateBookAsync_ShouldAddNewBook_WhenValidModelIsProvided()
         {
-            // Arrange
-            var model = new CreateBookViewModel
+            var createBookModel = new CreateBookViewModel
             {
-                Title = "New Book",
-                Genre = "Fiction",
-                Pages = 300,
-                Price = 19.99m,
-                Description = "A new book",
-                Publisher = "Publisher",
-                ImageUrl = "image.jpg",
-                AuthorName = "Author 1"
+                Title = "Harry Potter and the Chamber of Secrets",
+                Genre = "Fantasy",
+                Pages = 251,
+                Price = 21.99m,
+                Description = "Second book in the Harry Potter series",
+                Publisher = "Bloomsbury",
+                AuthorName = authorName,
+                ImageUrl = "image_url_2"
             };
 
-            var author = new Author { Name = "Author 1" };
-
-            mockAuthorRepository.Setup(repo => repo.GetAllAttached())
-                .Returns(new List<Author> { author }.AsQueryable());
-            mockAuthorRepository.Setup(repo => repo.AddAsync(It.IsAny<Author>())).Returns(Task.CompletedTask);
-            mockBookRepository.Setup(repo => repo.AddAsync(It.IsAny<Book>())).Returns(Task.CompletedTask);
-
             // Act
-            await bookService.CreateBookAsync(model);
+            await bookService.CreateBookAsync(createBookModel);
 
             // Assert
-            mockBookRepository.Verify(repo => repo.AddAsync(It.IsAny<Book>()), Times.Once);
+            var book = await context.Books
+                .FirstOrDefaultAsync(b => b.Title == createBookModel.Title);
+
+            Assert.NotNull(book);
+            Assert.That(book.Title, Is.EqualTo(createBookModel.Title));
+            Assert.That(book.Author.Name, Is.EqualTo(authorName));
         }
 
         [Test]
         public async Task GetBookDetailsByIdAsync_ShouldReturnBookDetails_WhenBookExists()
         {
-            // Arrange
-            var book = new Book
-            {
-                Id = 1,
-                Title = "Book 1",
-                Genre = "Fiction",
-                Pages = 300,
-                Description = "A great book",
-                Publisher = "Publisher 1",
-                Price = 20.99m,
-                ImageUrl = "image.jpg",
-                IsDeleted = false,
-                Author = new Author { Id = 1, Name = "Author 1" }
-            };
+            var book = await context.Books.FirstOrDefaultAsync(b => b.Title == "Harry Potter and the Philosopher's Stone");
 
-            mockBookRepository.Setup(repo => repo.GetAllAttached())
-                .Returns(new List<Book> { book }.AsQueryable());
+            var bookDetails = await bookService.GetBookDetailsByIdAsync(book.Id);
 
-            // Act
-            var result = await bookService.GetBookDetailsByIdAsync(1);
-
-            // Assert
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result.Title, Is.EqualTo("Book 1"));
-            Assert.That(result.Author, Is.EqualTo("Author 1"));
+            Assert.NotNull(bookDetails);
+            Assert.That(bookDetails.Title, Is.EqualTo(book.Title));
+            Assert.That(bookDetails.Author, Is.EqualTo(book.Author.Name));
         }
 
         [Test]
-        public async Task EditBookAsync_ShouldEditBook_WhenValidDataIsProvided()
+        public async Task EditBookAsync_ShouldUpdateBookDetails_WhenValidModelIsProvided()
         {
-            // Arrange
-            var model = new EditBookViewModel
+            var book = await context.Books.FirstOrDefaultAsync(b => b.Title == "Harry Potter and the Philosopher's Stone");
+            var editModel = new EditBookViewModel
             {
-                Id = 1,
-                Title = "Updated Book",
-                Genre = "Non-fiction",
-                Pages = 250,
-                Price = 15.99m,
+                Id = book.Id,
+                Title = "Harry Potter and the Sorcerer's Stone",
+                Genre = "Fantasy",
+                Pages = 223,
+                Price = 19.99m,
                 Description = "Updated description",
-                Publisher = "New Publisher",
-                ImageUrl = "updatedImage.jpg",
-                AuthorId = 1,
-                AuthorName = "Author 1"
+                Publisher = "Bloomsbury",
+                ImageUrl = "updated_image_url",
+                AuthorId = book.AuthorId,
+                AuthorName = book.Author.Name
             };
 
-            var author = new Author { Id = 1, Name = "Author 1" };
+            var result = await bookService.EditBookAsync(editModel);
 
-            mockAuthorRepository.Setup(repo => repo.FirstOrDefaultAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Author, bool>>>()))
-                .ReturnsAsync(author);
-            mockBookRepository.Setup(repo => repo.UpdateAsync(It.IsAny<Book>())).ReturnsAsync(true);
-
-            // Act
-            var result = await bookService.EditBookAsync(model);
-
-            // Assert
-            Assert.That(result, Is.True);
-            mockBookRepository.Verify(repo => repo.UpdateAsync(It.IsAny<Book>()), Times.Once);
+            Assert.IsTrue(result);
+            var updatedBook = await context.Books.FirstOrDefaultAsync(b => b.Id == book.Id);
+            Assert.That(updatedBook.Title, Is.EqualTo(editModel.Title));
         }
 
         [Test]
-        public async Task SoftDeleteBookAsync_ShouldDeleteBook_WhenBookExists()
+        public async Task SoftDeleteBookAsync_ShouldMarkBookAsDeleted_WhenBookExists()
         {
-            // Arrange
-            var book = new Book { Id = 1, Title = "Book to delete", IsDeleted = false };
-            mockBookRepository.Setup(repo => repo.FirstOrDefaultAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Book, bool>>>()))
-                .ReturnsAsync(book);
-            mockBookRepository.Setup(repo => repo.UpdateAsync(It.IsAny<Book>())).ReturnsAsync(true);
+            var book = await context.Books.FirstOrDefaultAsync(b => b.Title == "Harry Potter and the Philosopher's Stone");
 
-            // Act
-            var result = await bookService.SoftDeleteBookAsync(1);
+            var result = await bookService.SoftDeleteBookAsync(book.Id);
 
-            // Assert
-            Assert.That(result, Is.True);
-            Assert.That(book.IsDeleted, Is.True);
+            Assert.IsTrue(result);
+            var deletedBook = await context.Books.FirstOrDefaultAsync(b => b.Id == book.Id);
+            Assert.That(deletedBook.IsDeleted, Is.True);
+        }
+
+        [Test]
+        public async Task SoftDeleteBookAsync_ShouldReturnFalse_WhenBookDoesNotExist()
+        {
+            var result = await bookService.SoftDeleteBookAsync(999);
+
+            Assert.IsFalse(result);
         }
     }
 }

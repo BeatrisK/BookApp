@@ -16,3 +16,5 @@ C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.ViewModels\obj\
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.ViewModels\obj\Debug\net8.0\refint\BookApp.Web.ViewModels.dll
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.ViewModels\obj\Debug\net8.0\BookApp.Web.ViewModels.pdb
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.ViewModels\obj\Debug\net8.0\ref\BookApp.Web.ViewModels.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.ViewModels\bin\Debug\net8.0\BookApp.Data.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.ViewModels\bin\Debug\net8.0\BookApp.Data.pdb

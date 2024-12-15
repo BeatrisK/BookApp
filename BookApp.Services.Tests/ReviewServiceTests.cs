@@ -1,83 +1,159 @@
-﻿using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using BookApp.Services.Data;
+﻿using BookApp.Services.Data;
 using BookApp.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using BookApp.Data.Models.Repository.Interfaces;
 using BookApp.Web.ViewModels.Review;
+using BookApp.Data.Models.Repository;
+using BookApp.Data;
+using Microsoft.EntityFrameworkCore;
 
-[TestFixture]
-public class ReviewServiceTests
+namespace BookApp.Services.Tests
 {
-    private Mock<IRepository<Review, int>> _mockReviewRepository;
-    private Mock<IRepository<Book, int>> _mockBookRepository;
-    private Mock<IRepository<ApplicationUser, string>> _mockUserRepository;
-    private Mock<UserManager<ApplicationUser>> _mockUserManager;
-    private ReviewService _reviewService;
-
-    [SetUp]
-    public void SetUp()
+    [TestFixture]
+    public class ReviewServiceTests
     {
-        _mockReviewRepository = new Mock<IRepository<Review, int>>();
-        _mockBookRepository = new Mock<IRepository<Book, int>>();
-        _mockUserRepository = new Mock<IRepository<ApplicationUser, string>>();
-        _mockUserManager = new Mock<UserManager<ApplicationUser>>(
-            Mock.Of<IUserStore<ApplicationUser>>(), null, null, null, null, null, null, null, null);
+        private BookDbContext context;
+        private ReviewService reviewService;
 
-        _reviewService = new ReviewService(
-            _mockReviewRepository.Object,
-            _mockBookRepository.Object,
-            _mockUserRepository.Object,
-            _mockUserManager.Object);
-    }
-
-    [Test]
-    public async Task IndexGetAllAsync_ShouldReturnReviews_WhenReviewsExist()
-    {
-        var reviews = new List<Review>
+        [SetUp]
+        public async Task Setup()
         {
-            new Review { Id = 1, BookId = 1, Rating = 5, ReviewText = "Great book!", ReviewDate = DateTime.Now, UserId = "user1" },
-            new Review { Id = 2, BookId = 1, Rating = 4, ReviewText = "Good book.", ReviewDate = DateTime.Now, UserId = "user2" }
-        }.AsQueryable();
+            var options = new DbContextOptionsBuilder<BookDbContext>()
+                .UseInMemoryDatabase(databaseName: $"BookDb_{Guid.NewGuid()}")
+                .Options;
 
-        _mockReviewRepository.Setup(r => r.GetAllAttached()).Returns(reviews);
+            context = new BookDbContext(options);
 
-        var books = new List<Book> { new Book { Id = 1, Title = "Test Book" } }.AsQueryable();
-        _mockBookRepository.Setup(b => b.GetAllAttached()).Returns(books);
+            var user = new ApplicationUser { Id = "user1", UserName = "testuser" };
+            var book = new Book
+            {
+                Id = 1,
+                Title = "Test Book",
+                Genre = "Fiction",
+                Pages = 300,
+                Description = "Test Description",
+                Publisher = "Test Publisher",
+                Price = 19.99M,
+                IsDeleted = false
+            };
+            var review = new Review
+            {
+                Id = 1,
+                BookId = 1,
+                Rating = 5,
+                ReviewText = "Great book!",
+                ReviewDate = DateTime.UtcNow,
+                UserId = "user1",
+                IsDeleted = false
+            };
 
-        var result = await _reviewService.IndexGetAllAsync(1);
+            context.Users.Add(user);
+            context.Books.Add(book);
+            context.Reviews.Add(review);
+            await context.SaveChangesAsync();
 
-        Assert.That(result, Is.Not.Null);
-        Assert.That(result.Count(), Is.EqualTo(2));
-        Assert.That(result.First().ReviewText, Is.EqualTo("Great book!"));
-        Assert.That(result.First().Rating, Is.EqualTo(5));
-    }
+            var reviewRepo = new BaseRepository<Review, int>(context);
+            var bookRepo = new BaseRepository<Book, int>(context);
+            var userRepo = new BaseRepository<ApplicationUser, string>(context);
 
-    [Test]
-    public async Task AddReviewAsync_ShouldThrowException_WhenReviewAlreadyExists()
-    {
-        var existingReview = new Review { BookId = 1, UserId = "user1", IsDeleted = false };
-        var model = new AddReviewViewModel
+            reviewService = new ReviewService(reviewRepo, bookRepo, userRepo, null);
+        }
+
+        [TearDown]
+        public async Task Teardown()
         {
-            BookId = 1,
-            UserId = "user1",
-            Rating = 4,
-            ReviewText = "Nice book",
-            ReviewDate = DateTime.Now
-        };
+            if (context != null)
+            {
+                await context.Database.EnsureDeletedAsync();
+                await context.DisposeAsync();
+            }
+        }
 
-        _mockReviewRepository.Setup(r => r.GetAllAttached())
-            .Returns(new List<Review> { existingReview }.AsQueryable());
+        [Test]
+        public async Task IndexGetAllAsync_ShouldReturnReviewsForGivenBookId()
+        {
+            var reviews = await reviewService.IndexGetAllAsync(1);
 
-        var ex = Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await _reviewService.AddReviewAsync(model));
+            Assert.That(reviews.Count(), Is.EqualTo(1), "Expected 1 review for the book.");
+            Assert.That(reviews.First().ReviewText, Is.EqualTo("Great book!"), "Review text does not match.");
+        }
 
-        Assert.That(ex.Message, Is.EqualTo("You have already written a review for this book."));
+        [Test]
+        public void AddReviewAsync_ShouldThrowException_WhenBookNotFound()
+        {
+            var model = new AddReviewViewModel
+            {
+                BookId = 999, 
+                Rating = 4,
+                ReviewText = "New review",
+                UserId = "user1",
+                ReviewDate = DateTime.UtcNow
+            };
+
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await reviewService.AddReviewAsync(model));
+        }
+
+        [Test]
+        public async Task AddReviewAsync_ShouldAddReview_WhenValidModelIsProvided()
+        {
+            var model = new AddReviewViewModel
+            {
+                BookId = 1,
+                Rating = 4,
+                ReviewText = "Another review",
+                UserId = "newUser", 
+                ReviewDate = DateTime.UtcNow
+            };
+
+            await reviewService.AddReviewAsync(model);
+
+            var reviews = await context.Reviews.Where(r => r.BookId == 1).ToListAsync();
+            Assert.That(reviews.Count, Is.EqualTo(2), "Expected 2 reviews for the book.");
+            Assert.That(reviews.Any(r => r.ReviewText == "Another review"), Is.True, "The new review was not added.");
+        }
+
+        [Test]
+        public async Task EditReviewAsync_ShouldUpdateReview_WhenValidModelIsProvided()
+        {
+            var model = new EditReviewViewModel
+            {
+                Id = 1,
+                BookId = 1,
+                Rating = 3,
+                ReviewText = "Updated review",
+                ReviewDate = DateTime.UtcNow,
+                UserId = "user1"
+            };
+
+            var result = await reviewService.EditReviewAsync(model);
+
+            Assert.That(result, Is.True, "EditReviewAsync should return true on successful update.");
+            var updatedReview = await context.Reviews.FirstAsync(r => r.Id == 1);
+            Assert.That(updatedReview.ReviewText, Is.EqualTo("Updated review"), "Review text was not updated.");
+        }
+
+        [Test]
+        public async Task SoftDeleteReviewAsync_ShouldMarkReviewAsDeleted()
+        {
+            var result = await reviewService.SoftDeleteReviewAsync(1);
+
+            Assert.That(result, Is.True, "SoftDeleteReviewAsync should return true on successful deletion.");
+            var deletedReview = await context.Reviews.FirstAsync(r => r.Id == 1);
+            Assert.That(deletedReview.IsDeleted, Is.True, "Review was not marked as deleted.");
+        }
+
+        [Test]
+        public async Task UserHasWrittenReviewForBookAsync_ShouldReturnTrue_WhenUserHasReview()
+        {
+            var result = await reviewService.UserHasWrittenReviewForBookAsync(1, "user1");
+
+            Assert.That(result, Is.True, "Expected true for existing review by the user.");
+        }
+
+        [Test]
+        public async Task UserHasWrittenReviewForBookAsync_ShouldReturnFalse_WhenUserHasNoReview()
+        {
+            var result = await reviewService.UserHasWrittenReviewForBookAsync(1, "user2");
+
+            Assert.That(result, Is.False, "Expected false for user with no reviews.");
+        }
     }
-
 }

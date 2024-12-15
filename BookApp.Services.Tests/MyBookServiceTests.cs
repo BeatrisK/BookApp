@@ -1,52 +1,99 @@
-﻿using BookApp.Data.Models;
-using BookApp.Data.Models.Repository.Interfaces;
+﻿using BookApp.Data;
+using BookApp.Data.Models;
+using BookApp.Data.Models.Repository;
 using BookApp.Services.Data;
-using Moq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookApp.Services.Tests
 {
     [TestFixture]
     public class MyBookServiceTests
     {
-        private Mock<IRepository<Book, int>> _mockBookRepository;
-        private MyBookService _bookService;
+        private BookDbContext context;
+        private MyBookService myBookService;
 
         [SetUp]
-        public void SetUp()
+        public async Task Setup()
         {
-            // Мокиране на репозиторието
-            _mockBookRepository = new Mock<IRepository<Book, int>>();
-            _bookService = new MyBookService(_mockBookRepository.Object);
+            var options = new DbContextOptionsBuilder<BookDbContext>()
+                .UseInMemoryDatabase(databaseName: $"BookDb_{Guid.NewGuid()}")
+                .Options;
+
+            context = new BookDbContext(options);
+
+            var author = new Author
+            {
+                Id = 1,
+                Name = "John Doe"
+            };
+
+            var books = new List<Book>
+        {
+            new Book
+            {
+                Id = 1,
+                Title = "Book One",
+                Genre = "Fiction",
+                Pages = 300,
+                Description = "A fascinating tale.",
+                Publisher = "Publisher A",
+                Price = 19.99M,
+                ImageUrl = null,
+                Author = author
+            },
+            new Book
+            {
+                Id = 2,
+                Title = "Book Two",
+                Genre = "Non-Fiction",
+                Pages = 200,
+                Description = "An informative book.",
+                Publisher = "Publisher B",
+                Price = 9.99M,
+                ImageUrl = null,
+                Author = author
+            }
+        };
+
+            context.Authors.Add(author);
+            context.Books.AddRange(books);
+
+            await context.SaveChangesAsync();
+
+            var bookRepository = new BaseRepository<Book, int>(context);
+            myBookService = new MyBookService(bookRepository);
+        }
+
+        [TearDown]
+        public async Task Teardown()
+        {
+            if (context != null)
+            {
+                await context.Database.EnsureDeletedAsync();
+                await context.DisposeAsync();
+            }
         }
 
         [Test]
-        public async Task IndexGetAllAsync_ShouldReturnOrderedBooks_WhenCalled()
+        public async Task IndexGetAllAsync_ShouldReturnAllBooksOrderedByTitle()
         {
-            // Подготвяме тестови данни
-            var books = new List<Book>
-            {
-                new Book { Id = 1, Title = "Book A", Author = new Author { Name = "Author Z" } },
-                new Book { Id = 2, Title = "Book B", Author = new Author { Name = "Author Y" } },
-                new Book { Id = 3, Title = "Book C", Author = new Author { Name = "Author X" } }
-            };
+            var result = (await myBookService.IndexGetAllAsync()).ToList();
 
-            // Мок на GetAllAttached() метод, който ще върне нашия списък с книги
-            _mockBookRepository.Setup(repo => repo.GetAllAttached())
-                .Returns(books.AsQueryable()); // Връщаме IQueryable, без да използваме ReturnsAsync
+            Assert.That(result.Count, Is.EqualTo(2), "Expected 2 books in the result.");
+            Assert.That(result[0].Title, Is.EqualTo("Book One"), "Expected the first book to be 'Book One'.");
+            Assert.That(result[1].Title, Is.EqualTo("Book Two"), "Expected the second book to be 'Book Two'.");
+        }
 
-            // Извикваме метода на сервиза
-            var result = await _bookService.IndexGetAllAsync();
+        [Test]
+        public async Task IndexGetAllAsync_ShouldReturnEmptyList_WhenNoBooksExist()
+        {
+            var allBooks = context.Books.ToList();
+            context.Books.RemoveRange(allBooks);
+            await context.SaveChangesAsync();
 
-            // Преобразуваме резултата в List, за да използваме Count
-            var resultList = result.ToList();
+            var result = (await myBookService.IndexGetAllAsync()).ToList();
 
-            // Проверяваме дали броят на книгите е правилен
-            Assert.That(resultList.Count, Is.EqualTo(3)); // Проверка на броя елементи
-
-            // Проверяваме дали книгите са подредени правилно по заглавие
-            Assert.That(resultList[0].Title, Is.EqualTo("Book A"));
-            Assert.That(resultList[1].Title, Is.EqualTo("Book B"));
-            Assert.That(resultList[2].Title, Is.EqualTo("Book C"));
+            Assert.That(result.Count, Is.EqualTo(0), "Expected no books in the result.");
         }
     }
 }

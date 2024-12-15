@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BookApp.Web.Infrastructure
-build_property.ProjectDir = C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Web.Infrastructure\
+build_property.ProjectDir = C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

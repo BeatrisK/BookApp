@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj": {}
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj",
         "projectName": "BookApp.Common",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,14 +64,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj",
         "projectName": "BookApp.Data.Models",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -130,14 +130,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj",
         "projectName": "BookApp.Data",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -154,11 +154,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
               }
             }
           }
@@ -201,14 +201,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.10, )"
-            },
-            "Moq": {
-              "target": "Package",
-              "version": "[4.20.72, )"
-            },
-            "xUnit": {
-              "target": "Package",
-              "version": "[2.9.2, )"
             }
           },
           "imports": [
@@ -231,14 +223,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj",
         "projectName": "BookApp.Services.Data",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -255,14 +247,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj"
               }
             }
           }
@@ -301,14 +293,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj",
         "projectName": "BookApp.Services.Tests",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Tests\\BookApp.Services.Tests.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Tests\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -325,17 +317,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web\\BookApp.Web.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web\\BookApp.Web.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\BookApp.Web.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\BookApp.Web.csproj"
               }
             }
           }
@@ -400,14 +392,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj",
         "projectName": "BookApp.Web.Infrastructure",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -424,11 +416,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj"
               }
             }
           }
@@ -481,14 +473,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj",
         "projectName": "BookApp.Web.ViewModels",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -505,11 +497,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Common\\BookApp.Common.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Common\\BookApp.Common.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              },
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj"
               }
             }
           }
@@ -548,14 +543,14 @@
         }
       }
     },
-    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web\\BookApp.Web.csproj": {
+    "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\BookApp.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web\\BookApp.Web.csproj",
+        "projectUniqueName": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\BookApp.Web.csproj",
         "projectName": "BookApp.Web",
-        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web\\BookApp.Web.csproj",
+        "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\BookApp.Web.csproj",
         "packagesPath": "C:\\Users\\Betty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web\\obj\\",
+        "outputPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Betty\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -572,20 +567,20 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data.Models\\BookApp.Data.Models.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Data\\BookApp.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Data\\BookApp.Data.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Services.Data\\BookApp.Services.Data.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookApp.Services.Data.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.Infrastructure\\BookApp.Web.Infrastructure.csproj"
               },
-              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
-                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp.Web\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj"
+              "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj": {
+                "projectPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj"
               }
             }
           }

@@ -381,3 +381,13 @@ C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Services.Tests\
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Services.Tests\bin\Debug\net8.0\BookApp.Web.Infrastructure.dll
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Services.Tests\bin\Debug\net8.0\BookApp.Web.pdb
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Services.Tests\bin\Debug\net8.0\BookApp.Web.Infrastructure.pdb
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_BookApp.Services.Tests
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.csproj.AssemblyReference.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.AssemblyInfoInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.AssemblyInfo.cs
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.sourcelink.json
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\refint\BookApp.Services.Tests.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Services.Tests\obj\Debug\net8.0\BookApp.Services.Tests.pdb

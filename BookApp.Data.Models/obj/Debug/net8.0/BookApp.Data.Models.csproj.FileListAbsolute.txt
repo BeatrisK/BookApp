@@ -10,3 +10,4 @@ C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Deb
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\refint\BookApp.Data.Models.dll
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.pdb
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\ref\BookApp.Data.Models.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Data.Models\obj\Debug\net8.0\BookApp.Data.Models.csproj.AssemblyReference.cache

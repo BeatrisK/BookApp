@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{16D3CB7A-9BC1-4A40-97C8-55A360FBD27F}|BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj|c:\\users\\betty\\documents\\softuni\\web\\bookapp\\bookapp\\bookapp.web.viewmodels\\author\\authorindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16D3CB7A-9BC1-4A40-97C8-55A360FBD27F}|BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj|solutionrelative:bookapp.web.viewmodels\\author\\authorindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A90E1399-4F38-443E-8517-01FAB75BD340}|BookApp.Services.Data\\BookApp.Services.Data.csproj|c:\\users\\betty\\documents\\softuni\\web\\bookapp\\bookapp\\bookapp.services.data\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A90E1399-4F38-443E-8517-01FAB75BD340}|BookApp.Services.Data\\BookApp.Services.Data.csproj|solutionrelative:bookapp.services.data\\authorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16D3CB7A-9BC1-4A40-97C8-55A360FBD27F}|BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj|c:\\users\\betty\\documents\\softuni\\web\\bookapp\\bookapp\\bookapp.web.viewmodels\\author\\authorpagebookdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16D3CB7A-9BC1-4A40-97C8-55A360FBD27F}|BookApp.Web.ViewModels\\BookApp.Web.ViewModels.csproj|solutionrelative:bookapp.web.viewmodels\\author\\authorpagebookdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A90E1399-4F38-443E-8517-01FAB75BD340}|BookApp.Services.Data\\BookApp.Services.Data.csproj|c:\\users\\betty\\documents\\softuni\\web\\bookapp\\bookapp\\bookapp.services.data\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A90E1399-4F38-443E-8517-01FAB75BD340}|BookApp.Services.Data\\BookApp.Services.Data.csproj|solutionrelative:bookapp.services.data\\bookservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D0B922A9-E4E8-4AC9-AB42-8CE9DE2E3795}|BookApp.Web\\BookApp.Web.csproj|c:\\users\\betty\\documents\\softuni\\web\\bookapp\\bookapp\\bookapp.web\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0B922A9-E4E8-4AC9-AB42-8CE9DE2E3795}|BookApp.Web\\BookApp.Web.csproj|solutionrelative:bookapp.web\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -25,8 +41,61 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthorPageBookDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\Author\\AuthorPageBookDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "BookApp.Web.ViewModels\\Author\\AuthorPageBookDetailsViewModel.cs",
+              "ToolTip": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\Author\\AuthorPageBookDetailsViewModel.cs",
+              "RelativeToolTip": "BookApp.Web.ViewModels\\Author\\AuthorPageBookDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T11:25:42.562Z"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AuthorIndexViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\Author\\AuthorIndexViewModel.cs",
+              "RelativeDocumentMoniker": "BookApp.Web.ViewModels\\Author\\AuthorIndexViewModel.cs",
+              "ToolTip": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web.ViewModels\\Author\\AuthorIndexViewModel.cs",
+              "RelativeToolTip": "BookApp.Web.ViewModels\\Author\\AuthorIndexViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T11:24:43.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BookService.cs",
+              "DocumentMoniker": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookService.cs",
+              "RelativeDocumentMoniker": "BookApp.Services.Data\\BookService.cs",
+              "ToolTip": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\BookService.cs",
+              "RelativeToolTip": "BookApp.Services.Data\\BookService.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAswB0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T11:23:55.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthorService.cs",
+              "DocumentMoniker": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\AuthorService.cs",
+              "RelativeDocumentMoniker": "BookApp.Services.Data\\AuthorService.cs",
+              "ToolTip": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Services.Data\\AuthorService.cs",
+              "RelativeToolTip": "BookApp.Services.Data\\AuthorService.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwB8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T11:23:49.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Register.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\Betty\\Documents\\SoftUni\\Web\\BookApp\\BookApp\\BookApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeDocumentMoniker": "BookApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
@@ -34,8 +103,7 @@
               "RelativeToolTip": "BookApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "ViewState": "AgIAAGkAAAAAAAAAAAAIwH4AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T11:22:50.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T11:22:50.816Z"
             }
           ]
         }

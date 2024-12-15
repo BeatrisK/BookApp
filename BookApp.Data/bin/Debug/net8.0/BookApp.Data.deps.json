@@ -986,6 +986,9 @@
         }
       },
       "BookApp.Data.Models/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.10"
+        },
         "runtime": {
           "BookApp.Data.Models.dll": {
             "assemblyVersion": "1.0.0",

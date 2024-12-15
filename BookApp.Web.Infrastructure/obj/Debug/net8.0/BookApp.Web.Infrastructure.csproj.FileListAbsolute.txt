@@ -22,3 +22,12 @@ C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Web.Infrastruct
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Web.Infrastructure\obj\Debug\net8.0\refint\BookApp.Web.Infrastructure.dll
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.pdb
 C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp.Web\BookApp.Web.Infrastructure\obj\Debug\net8.0\ref\BookApp.Web.Infrastructure.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.AssemblyInfo.cs
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.sourcelink.json
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\refint\BookApp.Web.Infrastructure.dll
+C:\Users\Betty\Documents\SoftUni\Web\BookApp\BookApp\BookApp.Web.Infrastructure\obj\Debug\net8.0\BookApp.Web.Infrastructure.pdb

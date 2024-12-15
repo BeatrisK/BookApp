@@ -6,9 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using static BookApp.Common.EntityValidationConstants;
-
-    [Authorize]
+    
     public class ReviewController : Controller
     {
         private readonly IReviewService reviewService;
@@ -36,6 +34,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Add(int bookId)
         {
             string userId = this.userManager.GetUserId(User)!;
@@ -63,6 +62,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(AddReviewViewModel model)
         {
             if (!ModelState.IsValid)
@@ -91,6 +91,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             EditReviewViewModel? formModel = await this.reviewService
@@ -112,6 +113,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(EditReviewViewModel model)
         {
             if (!ModelState.IsValid)
@@ -138,6 +140,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             DeleteReviewViewModel? reviewToDeleteViewModel =
@@ -152,6 +155,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> SoftDeleteConfirmed(DeleteReviewViewModel review)
         {
             bool isDeleted = await this.reviewService

@@ -22,7 +22,7 @@ namespace BookApp.Services.Data
         {
             Author? author = await authorRepository
                 .GetAllAttached()
-                .Include(a => a.Books.Where(b => !b.IsDeleted))
+                .Include(a => a.Books)
                 .FirstOrDefaultAsync(a => a.Id == id);
 
             AuthorIndexViewModel viewModel = null;
@@ -33,7 +33,9 @@ namespace BookApp.Services.Data
                 {
                     Id = author.Id,
                     Name = author.Name,
-                    Books = author.Books.Select(b => new AuthorPageBookDetailsViewModel
+                    Books = author.Books
+                    .Where(b => !b.IsDeleted)
+                    .Select(b => new AuthorPageBookDetailsViewModel
                     {
                         Title = b.Title,
                         Genre = b.Genre,

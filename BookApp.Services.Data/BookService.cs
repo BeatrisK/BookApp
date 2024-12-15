@@ -136,18 +136,20 @@ namespace BookApp.Services.Data
                 }
             }
 
-            var book = new Book
+            var book = await bookRepository.FirstOrDefaultAsync(b => b.Id == model.Id);
+            if (book == null)
             {
-                Id = model.Id,
-                Title = model.Title,
-                Genre = model.Genre,
-                Pages = model.Pages,
-                Description = model.Description,
-                Publisher = model.Publisher,
-                Price = model.Price,
-                ImageUrl = model.ImageUrl,
-                Author = author
-            };
+                return false;
+            }
+
+            book.Title = model.Title;
+            book.Genre = model.Genre;
+            book.Pages = model.Pages;
+            book.Description = model.Description;
+            book.Publisher = model.Publisher;
+            book.Price = model.Price;
+            book.ImageUrl = model.ImageUrl;
+            book.Author = author;
 
             bool result = await this.bookRepository.UpdateAsync(book);
             return result;

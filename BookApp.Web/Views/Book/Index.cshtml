@@ -8,7 +8,7 @@
 <div class="container my-5">
     <h2 class="text-center display-6 fw-bold mb-4">Browse Our Collection</h2>
     <p class="text-center text-muted mb-5">Discover books from various genres, authors, and styles.</p>
-    
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach (var book in Model)
         {
@@ -55,7 +55,10 @@
         }
     </div>
 
-    <div class="d-flex justify-content-end mt-4">
-        <a asp-action="Create" class="btn btn-primary px-4 py-2">+ Add New Book</a>
-    </div>
+    @if (User?.IsInRole("Admin") ?? false)
+    {
+        <div class="d-flex justify-content-end mt-4">
+            <a asp-action="Create" class="btn btn-primary px-4 py-2">+ Add New Book</a>
+        </div>
+    }
 </div>

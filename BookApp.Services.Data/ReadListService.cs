@@ -74,10 +74,10 @@
 
         public async Task<bool> RemoveBookFromUserBookListAsync(int bookId, string userId)
         {
-            Book? movie = await this.bookRepository
+            Book? book = await this.bookRepository
                 .GetByIdAsync(bookId);
 
-            if (movie == null)
+            if (book == null)
             {
                 return false;
             }

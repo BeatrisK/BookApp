@@ -25,7 +25,6 @@
         }
 
         [HttpGet]
-        [Area("Admin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
@@ -33,7 +32,6 @@
         }
 
         [HttpPost]
-        [Area("Admin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateBookViewModel model)
         {
@@ -62,7 +60,6 @@
         }
 
         [HttpGet]
-        [Area("Admin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
@@ -78,7 +75,6 @@
         }
 
 		[HttpPost]
-        [Area("Admin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(EditBookViewModel model)
 		{
@@ -114,7 +110,6 @@
         }
 
         [HttpPost]
-        [Area("Admin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SoftDeleteConfirmed(DeleteBookViewModel book)
         {

@@ -12,10 +12,11 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("cdc9f04e-bd88-41a9-b7d7-0da6d3fe9dfd")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BookApp.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c2c3b15085869995312d598af779cb77913ba9b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+532692a6a920749a6357d17ab54efb9dc67510a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BookApp.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BookApp.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
