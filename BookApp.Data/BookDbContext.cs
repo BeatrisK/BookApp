@@ -1,9 +1,8 @@
-﻿using BookApp.Data.Configuration;
+﻿using BookApp.Data.DataSeeder;
 using BookApp.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 using System.Reflection;
 
 namespace BookApp.Data
@@ -37,6 +36,7 @@ namespace BookApp.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            BookSeeder.SeedBooks(builder);
         }
     }
 }

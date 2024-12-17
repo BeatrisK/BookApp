@@ -10,7 +10,7 @@
             public const int GenreMaxLength = 20;
             public const int DescriptionMaxLength = 500;
             public const int DescriptionMinLength = 50;
-            public const int PublisherMaxLength = 20;
+            public const int PublisherMaxLength = 50;
             public const int PublisherMinLength = 5;
             public const int ImageUrlMaxLength = 2083;
             public const int ImageUrlMinLength = 8;

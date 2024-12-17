@@ -5,7 +5,6 @@
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Microsoft.AspNetCore.Identity;
 
     public class BookConfiguration : IEntityTypeConfiguration<Book>
     {
