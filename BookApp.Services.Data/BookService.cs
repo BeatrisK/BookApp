@@ -16,6 +16,34 @@ namespace BookApp.Services.Data
             this.bookRepository = bookRepository;
             this.authorRepository = authorRepository;
         }
+        public async Task<int> GetTotalBooksCountAsync()
+        {
+            return await this.bookRepository
+                .GetAllAttached()
+                .Where(b => b.IsDeleted == false)
+                .CountAsync();
+        }
+
+        public async Task<IEnumerable<BookIndexViewModel>> GetBooksByPageAsync(int page, int pageSize)
+        {
+            var books = await this.bookRepository
+                .GetAllAttached()
+                .Where(b => b.IsDeleted == false)
+                .OrderBy(b => b.Title)
+                .Skip((page - 1) * pageSize) 
+                .Take(pageSize) 
+                .Select(b => new BookIndexViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    ImageUrl = b.ImageUrl,
+                    AuthorName = b.Author.Name,
+                    AuthorId = b.Author.Id
+                })
+                .ToListAsync();
+
+            return books;
+        }
 
         public async Task<IEnumerable<BookIndexViewModel>> IndexGetAllAsync()
         {

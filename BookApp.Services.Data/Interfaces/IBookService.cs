@@ -3,19 +3,22 @@
     using Web.ViewModels.Book;
     public interface IBookService
     {
-        Task<IEnumerable<BookIndexViewModel>> IndexGetAllAsync();
+        public Task<int> GetTotalBooksCountAsync();
 
-        Task CreateBookAsync(CreateBookViewModel model);
+        public Task<IEnumerable<BookIndexViewModel>> GetBooksByPageAsync(int page, int pageSize);
 
-        Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(int id);
+        public Task<IEnumerable<BookIndexViewModel>> IndexGetAllAsync();
 
-        Task<EditBookViewModel> GetBookForEditByIdAsync(int id);
+        public Task CreateBookAsync(CreateBookViewModel model);
+
+        public Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(int id);
+
+        public Task<EditBookViewModel> GetBookForEditByIdAsync(int id);
 
         public Task<bool> EditBookAsync(EditBookViewModel model);
 
         public Task<DeleteBookViewModel?> GetBookForDeleteByIdAsync(int id);
 
         public Task<bool> SoftDeleteBookAsync(int id);
-
     }
 }

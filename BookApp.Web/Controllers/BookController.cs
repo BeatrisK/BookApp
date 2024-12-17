@@ -16,12 +16,28 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            IEnumerable<BookIndexViewModel> books =
-                await this.bookService.IndexGetAllAsync();
+            int pageSize = 3; // Колко книги да се показват на страница
 
-            return View(books);
+            // Вземане на книгите за съответната страница
+            var books = await this.bookService.GetBooksByPageAsync(page, pageSize);
+
+            // Вземане на общия брой книги
+            var totalBooks = await this.bookService.GetTotalBooksCountAsync();
+
+            // Изчисляване на общия брой страници
+            var totalPages = (int)Math.Ceiling(totalBooks / (double)pageSize);
+
+            // Създаване на модел за изгледа
+            var model = new BookIndexViewModel
+            {
+                Books = books,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View(model);
         }
 
         [HttpGet]

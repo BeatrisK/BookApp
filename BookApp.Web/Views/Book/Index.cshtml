@@ -1,5 +1,5 @@
 ﻿@using BookApp.Web.ViewModels.Book
-@model IEnumerable<BookIndexViewModel>
+@model BookIndexViewModel
 
 @{
     ViewData["Title"] = "All Books";
@@ -10,7 +10,7 @@
     <p class="text-center text-muted mb-5">Discover books from various genres, authors, and styles.</p>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var book in Model)
+        @foreach (var book in Model.Books)
         {
             <div class="col">
                 <div class="card shadow-sm border-0 h-100">
@@ -30,8 +30,8 @@
                         <h5 class="card-title text-truncate fw-semibold mb-2">@book.Title</h5>
                         <a asp-action="Index" asp-controller="Author" asp-route-id="@book.AuthorId" class="text-muted">
                             <small>@book.AuthorName</small>
-                            <p></p>
                         </a>
+                        <p></p>
                         <div class="mt-auto">
                             <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-outline-dark w-100 mb-2">
                                 <i class="bi bi-book"></i> View Details
@@ -52,6 +52,22 @@
                     </div>
                 </div>
             </div>
+        }
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        @if (Model.CurrentPage > 1)
+        {
+            <a class="btn btn-outline-dark" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)">
+                <i class="bi bi-chevron-left"></i> Previous
+            </a>
+        }
+        <span>Page @Model.CurrentPage of @Model.TotalPages</span>
+        @if (Model.CurrentPage < Model.TotalPages)
+        {
+            <a class="btn btn-outline-dark" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)">
+                Next <i class="bi bi-chevron-right"></i>
+            </a>
         }
     </div>
 
