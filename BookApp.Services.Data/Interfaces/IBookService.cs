@@ -20,5 +20,9 @@
         public Task<DeleteBookViewModel?> GetBookForDeleteByIdAsync(int id);
 
         public Task<bool> SoftDeleteBookAsync(int id);
+
+        public Task<IEnumerable<BookIndexViewModel>> SearchBooksAsync(string searchString, int page, int pageSize);
+
+        public Task<int> GetSearchBooksCountAsync(string searchString);
     }
 }

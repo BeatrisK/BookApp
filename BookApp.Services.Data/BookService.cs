@@ -211,5 +211,56 @@ namespace BookApp.Services.Data
             bookToDelete.IsDeleted = true;
             return await this.bookRepository.UpdateAsync(bookToDelete);
         }
+
+        public async Task<IEnumerable<BookIndexViewModel>> SearchBooksAsync(string searchString, int page, int pageSize)
+        {
+            var query = this.bookRepository
+                .GetAllAttached()
+                .Include(b => b.Author)
+                .Where(b => b.IsDeleted == false);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                query = query.Where(b =>
+                    b.Title.ToLower().Contains(searchString) ||
+                    b.Genre.ToLower().Contains(searchString) ||
+                    b.Author.Name.ToLower().Contains(searchString));
+            }
+
+            var books = await query
+                .OrderBy(b => b.Title)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(b => new BookIndexViewModel
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    ImageUrl = b.ImageUrl,
+                    AuthorName = b.Author.Name,
+                    AuthorId = b.Author.Id
+                })
+                .ToListAsync();
+
+            return books;
+        }
+
+        public async Task<int> GetSearchBooksCountAsync(string searchString)
+        {
+            var query = this.bookRepository
+                .GetAllAttached()
+                .Where(b => b.IsDeleted == false);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                query = query.Where(b =>
+                    b.Title.ToLower().Contains(searchString) ||
+                    b.Genre.ToLower().Contains(searchString) ||
+                    b.Author.Name.ToLower().Contains(searchString));
+            }
+
+            return await query.CountAsync();
+        }
     }
 }

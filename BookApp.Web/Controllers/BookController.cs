@@ -16,29 +16,40 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string searchString, int page = 1)
         {
-            int pageSize = 3; // Колко книги да се показват на страница
+            int pageSize = 3;
 
-            // Вземане на книгите за съответната страница
-            var books = await this.bookService.GetBooksByPageAsync(page, pageSize);
+            IEnumerable<BookIndexViewModel> books;
+            int totalBooks;
 
-            // Вземане на общия брой книги
-            var totalBooks = await this.bookService.GetTotalBooksCountAsync();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                books = await this.bookService.SearchBooksAsync(searchString, page, pageSize);
+                totalBooks = await this.bookService.GetSearchBooksCountAsync(searchString);
+            }
+            else
+            {
+                books = await this.bookService.GetBooksByPageAsync(page, pageSize);
+                totalBooks = await this.bookService.GetTotalBooksCountAsync();
+            }
 
-            // Изчисляване на общия брой страници
-            var totalPages = (int)Math.Ceiling(totalBooks / (double)pageSize);
+            int totalPages = (int)Math.Ceiling(totalBooks / (double)pageSize);
 
-            // Създаване на модел за изгледа
+            // Добавяне на SearchString във ViewData
+            ViewData["SearchString"] = searchString;
+
             var model = new BookIndexViewModel
             {
                 Books = books,
                 CurrentPage = page,
-                TotalPages = totalPages
+                TotalPages = totalPages,
+                SearchString = searchString
             };
 
             return View(model);
         }
+
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
